@@ -11,6 +11,10 @@
   border: 2px solid red;
 }
 
+.app-hover-pointer:hover {
+  cursor: pointer;
+}
+
 .app-hover-scale-sm {
   transition: all ease 0.2s;
 }

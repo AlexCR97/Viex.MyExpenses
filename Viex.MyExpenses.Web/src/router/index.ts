@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import Login from '@/views/Login.vue'
 import MainContainer from '@/views/MainContainer.vue'
+import Developer from '@/views/Developer/Developer.vue'
 import Home from '@/views/Home/Home.vue'
 import Transaction from '@/views/Transaction'
 
@@ -9,7 +11,7 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/login',
     component: MainContainer,
     children: [
       {
@@ -17,10 +19,18 @@ const routes: Array<RouteConfig> = [
         component: Home,
       },
       {
+        path: 'developer',
+        component: Developer,
+      },
+      {
         path: 'transaction/:id?',
         component: Transaction,
       },
     ],
+  },
+  {
+    path: '/login',
+    component: Login,
   },
 ]
 

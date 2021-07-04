@@ -1,6 +1,21 @@
 import { CategoryDescriptor } from "@/models/CategoryDescriptor";
+import axios from "axios";
+import { BaseApi } from "./BaseApi";
 
-export class DescriptorsApi {
+export class DescriptorsApi extends BaseApi {
+
+    endpoint: string = 'descriptors'
+
+    async createCategories(categories: string[]) {
+        const uri = `${this.uri}/categories`
+        await axios.post(uri, categories)
+    }
+
+    async createTransactionTypes(types: string[]) {
+        const uri = `${this.uri}/transactionTypes`
+        await axios.post(uri, types)
+    }
+
     async getExpenseCategories() {
         const categories: string[] = [
             "Food",

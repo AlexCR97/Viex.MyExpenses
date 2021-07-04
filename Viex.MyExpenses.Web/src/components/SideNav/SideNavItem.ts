@@ -11,13 +11,8 @@ export const DefaultSideNavItems: SideNavItem[] = [
         title: 'Home'
     },
     {
-        icon: 'mdi-pencil',
-        route: '/path1',
-        title: 'Path 1'
-    },
-    {
-        icon: 'mdi-pencil',
-        route: '/path2',
-        title: 'Path 2'
+        icon: 'mdi-code-tags',
+        route: '/developer',
+        title: 'Developer'
     },
 ]

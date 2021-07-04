@@ -14,7 +14,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     CategoryDescriptorId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -30,7 +29,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     TransactionTypeDescriptorId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -40,7 +38,7 @@ namespace Viex.MyExpenses.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<long>(type: "bigint", nullable: false)
@@ -51,12 +49,11 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -71,7 +68,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     TypeId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -90,9 +86,9 @@ namespace Viex.MyExpenses.Persistence.Migrations
                         principalColumn: "TransactionTypeDescriptorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TransactionEntries_User_UserId",
+                        name: "FK_TransactionEntries_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -125,7 +121,7 @@ namespace Viex.MyExpenses.Persistence.Migrations
                 name: "TransactionTypeDescriptors");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

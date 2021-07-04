@@ -45,19 +45,20 @@ namespace Viex.MyExpenses.Api
             {
                 var allowedOrigins = new string[]
                 {
-                    "https://localhost:8080"
+                    "http://localhost:8080"
                 };
 
                 options
                     .WithOrigins(allowedOrigins)
                     .AllowAnyHeader()
                     .AllowAnyMethod()
+                    .AllowCredentials()
                     ;
             });
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization(); // TODO Add auth
 
             app.UseEndpoints(endpoints =>
             {

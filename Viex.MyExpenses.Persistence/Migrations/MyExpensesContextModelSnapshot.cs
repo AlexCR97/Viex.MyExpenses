@@ -29,9 +29,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateDeleted")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
@@ -57,9 +54,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDeleted")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateUpdated")
@@ -95,9 +89,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateDeleted")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
@@ -117,9 +108,6 @@ namespace Viex.MyExpenses.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDeleted")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateUpdated")
@@ -142,7 +130,7 @@ namespace Viex.MyExpenses.Persistence.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.TransactionEntry", b =>
