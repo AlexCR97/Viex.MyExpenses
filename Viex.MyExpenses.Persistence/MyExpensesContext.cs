@@ -14,5 +14,6 @@ namespace Viex.MyExpenses.Persistence
         public DbSet<CategoryDescriptor> CategoryDescriptors { get; set; }
         public DbSet<TransactionEntry> TransactionEntries { get; set; }
         public DbSet<TransactionTypeDescriptor> TransactionTypeDescriptors { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

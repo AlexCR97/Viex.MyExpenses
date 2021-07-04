@@ -1509,6 +1509,19 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Viex.MyExpenses.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Viex.MyExpenses.Persistence": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Viex.MyExpenses.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Viex.MyExpenses.Domain.dll": {}
+        }
+      },
       "Viex.MyExpenses.Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -5767,6 +5780,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "Viex.MyExpenses.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Viex.MyExpenses.Domain/Viex.MyExpenses.Domain.csproj",
+      "msbuildProject": "../Viex.MyExpenses.Domain/Viex.MyExpenses.Domain.csproj"
+    },
     "Viex.MyExpenses.Persistence/1.0.0": {
       "type": "project",
       "path": "../Viex.MyExpenses.Persistence/Viex.MyExpenses.Persistence.csproj",
@@ -5776,23 +5794,23 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.EntityFrameworkCore.Design >= 5.0.7",
-      "Viex.MyExpenses.Persistence >= 1.0.0"
+      "Viex.MyExpenses.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\carp_\\.nuget\\packages\\": {}
+    "C:\\Users\\cpu_o\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\ASP Core\\Viex.MyExpenses.Api\\Viex.MyExpenses\\Viex.MyExpenses.Api.csproj",
+      "projectUniqueName": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Api\\Viex.MyExpenses.Api.csproj",
       "projectName": "Viex.MyExpenses.Api",
-      "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses.Api\\Viex.MyExpenses\\Viex.MyExpenses.Api.csproj",
-      "packagesPath": "C:\\Users\\carp_\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses.Api\\Viex.MyExpenses\\obj\\",
+      "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Api\\Viex.MyExpenses.Api.csproj",
+      "packagesPath": "C:\\Users\\cpu_o\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\carp_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cpu_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5801,14 +5819,15 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://pkgs.dev.azure.com/edwire/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {}
+        "https://edwire.pkgs.visualstudio.com/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {},
+        "https://pkgs.dev.azure.com/lnfdistributors/_packaging/lnfdistributors/nuget/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Projects\\ASP Core\\Viex.MyExpenses.Api\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {
-              "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses.Api\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj"
+            "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj": {
+              "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj"
             }
           }
         }
@@ -5840,12 +5859,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.13, 3.1.13]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5854,7 +5867,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -10,3 +10,15 @@ D:\Projects\ASP Core\Viex.MyExpenses.Api\Viex.MyExpenses.Persistence\obj\Debug\n
 D:\Projects\ASP Core\Viex.MyExpenses.Api\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
 D:\Projects\ASP Core\Viex.MyExpenses.Api\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
 D:\Projects\ASP Core\Viex.MyExpenses.Api\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.genruntimeconfig.cache
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.deps.json
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.runtimeconfig.json
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.runtimeconfig.dev.json
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.csprojAssemblyReference.cache
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.AssemblyInfoInputs.cache
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.AssemblyInfo.cs
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.csproj.CoreCompileInputs.cache
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
+C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.genruntimeconfig.cache

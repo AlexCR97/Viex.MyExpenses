@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Viex.MyExpenses.Persistence.Repositores;
 
 namespace Viex.MyExpenses.Persistence
 {
@@ -11,13 +12,17 @@ namespace Viex.MyExpenses.Persistence
     {
         public static IServiceCollection AddPersistenceLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<MyExpensesContext>(options =>
-            {
-                var connectionString = configuration.GetConnectionString("Default");
-                options.UseSqlServer(connectionString);
-            });
-
-            return services;
+            return services
+                .AddScoped<ICategoryDescriptorsRepository, CategoryDescriptorsRepository>()
+                .AddScoped<ITransactionEntriesRepository, TransactionEntriesRepository>()
+                .AddScoped<ITransactionTypeDescriptorsRepository, TransactionTypeDescriptorsRepository>()
+                .AddScoped<IUsersRepository, UsersRepository>()
+                .AddDbContext<MyExpensesContext>(options =>
+                {
+                    var connectionString = configuration.GetConnectionString("Default");
+                    options.UseSqlServer(connectionString);
+                })
+                ;
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Viex.MyExpenses.Persistence.Entities
+﻿namespace Viex.MyExpenses.Persistence.Entities
 {
     public class CategoryDescriptor : BaseDescriptor
     {

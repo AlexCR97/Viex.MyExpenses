@@ -10,7 +10,7 @@ using Viex.MyExpenses.Persistence;
 namespace Viex.MyExpenses.Persistence.Migrations
 {
     [DbContext(typeof(MyExpensesContext))]
-    [Migration("20210703215517_Init")]
+    [Migration("20210703235749_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long>("CategoryId")
+                    b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateCreated")
@@ -73,11 +73,16 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.Property<long>("TypeId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("TransactionEntryId");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TransactionEntries");
                 });
@@ -106,13 +111,47 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.ToTable("TransactionTypeDescriptors");
                 });
 
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.User", b =>
+                {
+                    b.Property<long>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateDeleted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.TransactionEntry", b =>
                 {
                     b.HasOne("Viex.MyExpenses.Persistence.Entities.CategoryDescriptor", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("Viex.MyExpenses.Persistence.Entities.TransactionTypeDescriptor", "Type")
                         .WithMany()
@@ -120,9 +159,17 @@ namespace Viex.MyExpenses.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Viex.MyExpenses.Persistence.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
 
                     b.Navigation("Type");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

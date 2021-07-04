@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Viex.MyExpenses.Persistence\Viex.MyExpenses.Persistence.csproj" />
+    <ProjectReference Include="..\Viex.MyExpenses.Domain\Viex.MyExpenses.Domain.csproj" />
   </ItemGroup>
 
 

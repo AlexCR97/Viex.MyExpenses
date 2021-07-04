@@ -10,28 +10,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Viex.MyExpenses.Domain;
 using Viex.MyExpenses.Persistence;
 
 namespace Viex.MyExpenses.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
-            services.AddPersistenceLayer(Configuration);
+            services
+                .AddDomainLayer(Configuration)
+                .AddControllers()
+                ;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -40,6 +40,20 @@ namespace Viex.MyExpenses.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(options =>
+            {
+                var allowedOrigins = new string[]
+                {
+                    "https://localhost:8080"
+                };
+
+                options
+                    .WithOrigins(allowedOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    ;
+            });
 
             app.UseRouting();
 
