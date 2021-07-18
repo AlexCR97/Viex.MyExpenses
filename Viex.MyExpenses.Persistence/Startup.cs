@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Viex.MyExpenses.Persistence.Repositores;
+using Viex.MyExpenses.Persistence.Repositores.TransactionEntries;
 
 namespace Viex.MyExpenses.Persistence
 {

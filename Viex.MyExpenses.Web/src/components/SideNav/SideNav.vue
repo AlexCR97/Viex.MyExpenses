@@ -2,9 +2,20 @@
   <v-navigation-drawer app permanent class="elevation-2">
     <template v-slot:prepend>
       <v-list-item two-line>
-        <v-list-item-avatar>
-          <img src="https://randomuser.me/api/portraits/women/81.jpg" />
-        </v-list-item-avatar>
+
+        <v-menu bottom left>
+          <template v-slot:activator="{ on, attrs }">
+            <v-list-item-avatar v-bind="attrs" v-on="on">
+              <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+            </v-list-item-avatar>
+          </template>
+
+          <v-list>
+            <v-list-item @click="onSignOutClicked">
+              <v-list-item-title>Sign Out</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
 
         <v-list-item-content>
           <v-list-item-title>Alejandro CR</v-list-item-title>
@@ -30,11 +41,21 @@
 </template>
 
 <script lang="ts">
+import api from "@/api";
+import timers from "@/utils/timers";
 import { Component, Vue } from "vue-property-decorator";
 import { DefaultSideNavItems } from './SideNavItem'
 
 @Component
 export default class SideNavComponent extends Vue {
+  
     items = DefaultSideNavItems
+
+    async onSignOutClicked() {
+      await api.auth.signOut()
+      this.$router.push('/')
+      await timers.wait(500)
+      window.location.reload()
+    }
 }
 </script>

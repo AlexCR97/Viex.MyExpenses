@@ -6,7 +6,7 @@
             <v-btn v-for="(item, index) of actions" :key="index"
                 :text="item.type == 'text'"
                 :color="item.variant"
-                class="text-capitalize"
+                class="text-capitalize ml-2"
                 :disabled="item.disabled != undefined && item.disabled != null ? item.disabled() : false"
                 :loading="item.loading != undefined && item.loading != null ? item.loading() : false"
                 @click="item.action()">

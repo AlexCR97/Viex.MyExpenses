@@ -1,8 +1,8 @@
 <template>
     <v-list-item class="app-hover-scale-sm elevation-1">
-        <v-list-item-avatar :class="clazz">
+        <span :class="clazz" style="min-width: 70px; text-align: right;">
             {{amount}}
-        </v-list-item-avatar>
+        </span>
         <v-list-item-content>
             <v-list-item-title>{{transaction.description}}</v-list-item-title>
             <v-list-item-subtitle v-if="hasCategory">{{transaction.category.description}}</v-list-item-subtitle>
@@ -37,9 +37,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { TransactionEntry } from '@/models/TransactionEntry'
-import { TransactionType } from '@/models/TransactionType'
 import { notNull } from '@/utils/validators'
 import { TransactionItemAction } from './TransactionItemAction'
+import { TransactionType } from '@/models/TransactionTypeDescriptor'
 
 @Component
 export default class TransactionItemComponent extends Vue {
@@ -69,6 +69,7 @@ export default class TransactionItemComponent extends Vue {
         return {
             'expense': this.isExpense,
             'income': this.isIncome,
+            'mr-4': true,
         }
     }
 
@@ -77,11 +78,11 @@ export default class TransactionItemComponent extends Vue {
     }
 
     get isExpense() {
-        return this.transaction.type == TransactionType.expense
+        return this.transaction.type.description == TransactionType.expense
     }
 
     get isIncome() {
-        return this.transaction.type == TransactionType.income
+        return this.transaction.type.description == TransactionType.income
     }
 }
 </script>

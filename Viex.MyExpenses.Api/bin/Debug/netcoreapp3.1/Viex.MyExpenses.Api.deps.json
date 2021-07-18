@@ -8,14 +8,7 @@
       "TRACE",
       "DEBUG",
       "NETCOREAPP",
-      "NETCOREAPP3_1",
-      "NETCOREAPP1_0_OR_GREATER",
-      "NETCOREAPP1_1_OR_GREATER",
-      "NETCOREAPP2_0_OR_GREATER",
-      "NETCOREAPP2_1_OR_GREATER",
-      "NETCOREAPP2_2_OR_GREATER",
-      "NETCOREAPP3_0_OR_GREATER",
-      "NETCOREAPP3_1_OR_GREATER"
+      "NETCOREAPP3_1"
     ],
     "languageVersion": "8.0",
     "platform": "",
@@ -309,6 +302,20 @@
         },
         "compile": {
           "Viex.MyExpenses.Api.dll": {}
+        }
+      },
+      "CsvHelper/27.1.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/CsvHelper.dll": {
+            "assemblyVersion": "27.0.0.0",
+            "fileVersion": "27.1.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -1392,6 +1399,7 @@
       },
       "Viex.MyExpenses.Domain/1.0.0": {
         "dependencies": {
+          "CsvHelper": "27.1.1",
           "Viex.MyExpenses.Persistence": "1.0.0"
         },
         "runtime": {
@@ -3040,6 +3048,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CsvHelper/27.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lo5yypClBORR2XiWPRxQApaA4C2R4GVCIPVRt9HfaLxLmVQtg/KZiOYsd4luLgyOxkUatF9R0QdFQYk7Y2l0cw==",
+      "path": "csvhelper/27.1.1",
+      "hashPath": "csvhelper.27.1.1.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

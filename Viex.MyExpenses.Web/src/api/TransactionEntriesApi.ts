@@ -1,37 +1,50 @@
 import { TransactionEntry } from "@/models/TransactionEntry";
-import { TransactionType } from "@/models/TransactionType";
-import arrays from "@/utils/arrays";
-import timers from "@/utils/timers";
+import { WeeklyTransactions } from "@/models/WeeklyTransactions";
+import { WeeklyTransactionsSearchParams } from "@/models/WeeklyTransactionsSearchParams";
+import storage from "@/storage";
+import { isNull } from "@/utils/validators";
+import axios from "axios";
+import { BaseApi } from "./BaseApi";
 
-export class TransactionEntriesApi {
+export class TransactionEntriesApi extends BaseApi {
+    
+    endpoint: string = 'transactionEntries';
     
     async create(transaction: TransactionEntry) {
+        transaction.userId = storage.getUserId(); // TODO Set in backend
         safeParseForPost(transaction)
-        await timers.wait(2000)
-        return transaction
+        const response = await axios.post<TransactionEntry>(this.uri, transaction)
+        return response.data
+    }
+
+    async deleteAll() {
+        const uri = `${this.uri}/all`;
+        await axios.delete(uri);
+    }
+
+    async getWeeklyTransactions(searchParams?: WeeklyTransactionsSearchParams) {
+        if (isNull(searchParams))
+            searchParams = new WeeklyTransactionsSearchParams()
+        
+        const uri = `${this.uri}/weekly`
+        const response = await axios.post<WeeklyTransactions>(uri, searchParams)
+        return response.data
+    }
+
+    async importFromCsv(csvFileBase64: string) {
+        const uri = `${this.uri}/import`
+        await axios.post(uri, { csvFileBase64 })
     }
     
     async search(options?: any): Promise<TransactionEntry[]> {
-        return arrays.fromRange(1, 10).map(index => ({
-            amount: index * 10,
-            categoryId: index,
-            category: index % 2 != 0
-                ? {
-                    categoryDescriptorId: index,
-                    description: `Category ${index}`,
-                }
-                : undefined,
-            date: new Date(),
-            description: `Transaction Entry #${index}`,
-            transactionEntryId: index,
-            type: index % 2 == 0
-                ? TransactionType.expense
-                : TransactionType.income,
-        }))
+        const response = await axios.get(this.uri)
+        return response.data
     }
 }
 
 function safeParseForPost(transaction: TransactionEntry) {
     transaction.amount = Number(transaction.amount)
     transaction.categoryId = Number(transaction.categoryId)
+    transaction.typeId = Number(transaction.typeId)
+    transaction.userId = Number(transaction.userId)
 }

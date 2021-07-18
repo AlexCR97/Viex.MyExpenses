@@ -1,4 +1,5 @@
 import { CategoryDescriptor } from "@/models/CategoryDescriptor";
+import { TransactionTypeDescriptor } from "@/models/TransactionTypeDescriptor";
 import axios from "axios";
 import { BaseApi } from "./BaseApi";
 
@@ -17,34 +18,20 @@ export class DescriptorsApi extends BaseApi {
     }
 
     async getExpenseCategories() {
-        const categories: string[] = [
-            "Food",
-            "Fitness",
-            "Home",
-            "Health",
-            "Hobbies",
-            "Technology",
-            "Others",
-        ];
-
-        return new Promise<CategoryDescriptor[]>(resolve => resolve(categories.map((category, index) => ({
-            categoryDescriptorId: index + 1,
-            description: category,
-        }))));
+        const uri = `${this.uri}/categories`
+        const response = await axios.get<CategoryDescriptor[]>(uri)
+        return response.data
     }
 
     async getIncomeCategories() {
-        const categories: string[] = [
-            "Salary",
-            "Bonus",
-            "Gifts",
-            "Prizes",
-            "Others",
-        ];
+        const uri = `${this.uri}/categories`
+        const response = await axios.get<CategoryDescriptor[]>(uri)
+        return response.data
+    }
 
-        return new Promise<CategoryDescriptor[]>(resolve => resolve(categories.map((category, index) => ({
-            categoryDescriptorId: index + 1,
-            description: category,
-        }))));
+    async getTransactionTypes() {
+        const uri = `${this.uri}/transactionTypes`
+        const response = await axios.get<TransactionTypeDescriptor[]>(uri)
+        return response.data
     }
 }

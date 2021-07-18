@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,7 +50,9 @@ namespace Viex.MyExpenses.Persistence.Repositores
 
         public async Task<IEnumerable<TransactionTypeDescriptor>> GetWhere(Expression<Func<TransactionTypeDescriptor, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _context.TransactionTypeDescriptors
+                .Where(predicate)
+                .ToListAsync();
         }
 
         public Task Update(TransactionTypeDescriptor entity)

@@ -2,7 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Microsoft.CSharp/4.5.0": {
+      "CsvHelper/27.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "[4.7.0]"
+        },
+        "compile": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
+        }
+      },
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -1500,10 +1512,32 @@
     }
   },
   "libraries": {
-    "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+    "CsvHelper/27.1.1": {
+      "sha512": "lo5yypClBORR2XiWPRxQApaA4C2R4GVCIPVRt9HfaLxLmVQtg/KZiOYsd4luLgyOxkUatF9R0QdFQYk7Y2l0cw==",
       "type": "package",
-      "path": "microsoft.csharp/4.5.0",
+      "path": "csvhelper/27.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.27.1.1.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net45/CsvHelper.dll",
+        "lib/net45/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net5.0/CsvHelper.dll",
+        "lib/net5.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "type": "package",
+      "path": "microsoft.csharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1516,6 +1550,7 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -1525,7 +1560,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -5717,23 +5752,24 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "CsvHelper >= 27.1.1",
       "Viex.MyExpenses.Persistence >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cpu_o\\.nuget\\packages\\": {}
+    "C:\\Users\\carp_\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj",
+      "projectUniqueName": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj",
       "projectName": "Viex.MyExpenses.Domain",
-      "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj",
-      "packagesPath": "C:\\Users\\cpu_o\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\obj\\",
+      "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj",
+      "packagesPath": "C:\\Users\\carp_\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\cpu_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\carp_\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5742,15 +5778,14 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://edwire.pkgs.visualstudio.com/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {},
-        "https://pkgs.dev.azure.com/lnfdistributors/_packaging/lnfdistributors/nuget/v3/index.json": {}
+        "https://pkgs.dev.azure.com/edwire/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {
-              "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj"
+            "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {
+              "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj"
             }
           }
         }
@@ -5764,6 +5799,12 @@
     "frameworks": {
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "CsvHelper": {
+            "target": "Package",
+            "version": "[27.1.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -5779,7 +5820,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }

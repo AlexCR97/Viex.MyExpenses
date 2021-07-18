@@ -10,3 +10,15 @@ C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.
 C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
 C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
 C:\Projects\Others\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.csproj.CopyComplete
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.deps.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\bin\Debug\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.csprojAssemblyReference.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.AssemblyInfoInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.AssemblyInfo.cs
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.csproj.CoreCompileInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.csproj.CopyComplete
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Domain\obj\Debug\netcoreapp3.1\Viex.MyExpenses.Domain.pdb

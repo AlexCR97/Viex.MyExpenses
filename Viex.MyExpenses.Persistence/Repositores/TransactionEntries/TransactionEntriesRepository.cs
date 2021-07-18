@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Viex.MyExpenses.Persistence.Entities;
 
-namespace Viex.MyExpenses.Persistence.Repositores
+namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
 {
     public interface ITransactionEntriesRepository : IRepository<TransactionEntry>
     {
-
+        Task DeleteAll();
+        Task<IList<TransactionEntry>> Search(TransactionEntriesQueryParams queryParams);
     }
 
     public class TransactionEntriesRepository : ITransactionEntriesRepository
@@ -25,7 +26,6 @@ namespace Viex.MyExpenses.Persistence.Repositores
 
         public async Task<long> Create(TransactionEntry entity)
         {
-            entity.DateCreated = DateTime.Now;
             await _context.TransactionEntries.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity.TransactionEntryId;
@@ -36,6 +36,13 @@ namespace Viex.MyExpenses.Persistence.Repositores
             var snapshot = await _context.TransactionEntries.FirstAsync(s => s.TransactionEntryId == id);
             _context.TransactionEntries.Remove(snapshot);
             await _context.SaveChangesAsync();
+        }
+
+        public Task DeleteAll()
+        {
+            _context.TransactionEntries.Clear();
+            _context.SaveChangesAsync();
+            return Task.CompletedTask;
         }
 
         public async Task<TransactionEntry> GetById(long id)
@@ -65,15 +72,28 @@ namespace Viex.MyExpenses.Persistence.Repositores
                 .ToListAsync();
         }
 
+        public async Task<IList<TransactionEntry>> Search(TransactionEntriesQueryParams queryParams)
+        {
+            var transactions = _context.TransactionEntries.AsQueryable();
+
+            if (queryParams != null)
+            {
+                if (queryParams.DateCreatedFrom.HasValue)
+                    transactions = transactions.Where(x => x.DateCreated >= queryParams.DateCreatedFrom);
+
+                if (queryParams.DateCreatedTo.HasValue)
+                    transactions = transactions.Where(x => x.DateCreated < queryParams.DateCreatedTo);
+            }
+
+            return await transactions
+                .Include(x => x.Category)
+                .Include(x => x.Type)
+                .ToListAsync();
+        }
+
         public async Task Update(TransactionEntry entity)
         {
-            var snapshot = await _context.TransactionEntries.FirstAsync(s => s.TransactionEntryId == entity.TransactionEntryId);
-            snapshot.Amount = entity.Amount;
-            snapshot.CategoryId = entity.CategoryId;
-            snapshot.DateUpdated = DateTime.Now;
-            snapshot.Description = entity.Description;
-
-            _context.TransactionEntries.Update(snapshot);
+            _context.TransactionEntries.Update(entity);
             await _context.SaveChangesAsync();
         }
     }

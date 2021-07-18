@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {}
+    "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {
+    "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj",
+        "projectUniqueName": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj",
         "projectName": "Viex.MyExpenses.Persistence",
-        "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj",
-        "packagesPath": "C:\\Users\\cpu_o\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\obj\\",
+        "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\Viex.MyExpenses.Persistence.csproj",
+        "packagesPath": "C:\\Users\\carp_\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\cpu_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\carp_\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -23,8 +23,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
-          "https://edwire.pkgs.visualstudio.com/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {},
-          "https://pkgs.dev.azure.com/lnfdistributors/_packaging/lnfdistributors/nuget/v3/index.json": {}
+          "https://pkgs.dev.azure.com/edwire/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -72,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

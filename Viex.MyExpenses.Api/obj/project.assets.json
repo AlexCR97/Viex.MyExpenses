@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "CsvHelper/27.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "[4.7.0]"
+        },
+        "compile": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/CsvHelper.dll": {}
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1513,6 +1525,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "CsvHelper": "27.1.1",
           "Viex.MyExpenses.Persistence": "1.0.0"
         },
         "compile": {
@@ -1539,6 +1552,28 @@
     }
   },
   "libraries": {
+    "CsvHelper/27.1.1": {
+      "sha512": "lo5yypClBORR2XiWPRxQApaA4C2R4GVCIPVRt9HfaLxLmVQtg/KZiOYsd4luLgyOxkUatF9R0QdFQYk7Y2l0cw==",
+      "type": "package",
+      "path": "csvhelper/27.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.27.1.1.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net45/CsvHelper.dll",
+        "lib/net45/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net5.0/CsvHelper.dll",
+        "lib/net5.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -5798,19 +5833,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cpu_o\\.nuget\\packages\\": {}
+    "C:\\Users\\carp_\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Api\\Viex.MyExpenses.Api.csproj",
+      "projectUniqueName": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Api\\Viex.MyExpenses.Api.csproj",
       "projectName": "Viex.MyExpenses.Api",
-      "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Api\\Viex.MyExpenses.Api.csproj",
-      "packagesPath": "C:\\Users\\cpu_o\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Api\\obj\\",
+      "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Api\\Viex.MyExpenses.Api.csproj",
+      "packagesPath": "C:\\Users\\carp_\\.nuget\\packages\\",
+      "outputPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\cpu_o\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\carp_\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5819,15 +5854,14 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://edwire.pkgs.visualstudio.com/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {},
-        "https://pkgs.dev.azure.com/lnfdistributors/_packaging/lnfdistributors/nuget/v3/index.json": {}
+        "https://pkgs.dev.azure.com/edwire/EW.Educate/_packaging/edgraph/nuget/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj": {
-              "projectPath": "C:\\Projects\\Others\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj"
+            "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj": {
+              "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Domain\\Viex.MyExpenses.Domain.csproj"
             }
           }
         }
@@ -5859,6 +5893,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.13, 3.1.13]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5867,7 +5907,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }

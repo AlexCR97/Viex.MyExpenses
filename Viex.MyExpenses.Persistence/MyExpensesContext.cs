@@ -16,4 +16,12 @@ namespace Viex.MyExpenses.Persistence
         public DbSet<TransactionTypeDescriptor> TransactionTypeDescriptors { get; set; }
         public DbSet<User> Users { get; set; }
     }
+
+    public static class DbContextExtensions
+    {
+        public static void Clear<T>(this DbSet<T> dbSet) where T : class
+        {
+            dbSet.RemoveRange(dbSet);
+        }
+    }
 }
