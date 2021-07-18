@@ -1,0 +1,12 @@
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.deps.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.runtimeconfig.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.runtimeconfig.dev.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\bin\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.csprojAssemblyReference.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.AssemblyInfoInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.AssemblyInfo.cs
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.csproj.CoreCompileInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Persistence\obj\Release\netcoreapp3.1\Viex.MyExpenses.Persistence.genruntimeconfig.cache
