@@ -2,37 +2,35 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Viex.MyExpenses.Domain;
-using Viex.MyExpenses.Persistence;
+using Viex.MyExpenses.Spa;
 
 namespace Viex.MyExpenses.Api
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddDomainLayer(Configuration)
+                //.AddSpaLayer(SpaLayerConfigurations)
                 .AddControllers()
                 ;
         }
@@ -47,6 +45,8 @@ namespace Viex.MyExpenses.Api
             app.UseCustomExceptionHandler();
 
             app.UseHttpsRedirection();
+
+            //app.UseSpaLayer(SpaLayerBuilderOptions);
 
             app.UseCors(options =>
             {
@@ -71,6 +71,41 @@ namespace Viex.MyExpenses.Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private string SolutionPath
+        {
+            get {
+                var combined = Path.Combine(Environment.ContentRootPath, @"..\");
+                return Path.GetFullPath(combined);
+            }
+        }
+
+        private string SpaProjectPath
+        {
+            get {
+                return $"{SolutionPath}/Viex.MyExpenses.Spa";
+            }
+        }
+
+        private SpaLayerConfigurations SpaLayerConfigurations
+        {
+            get {
+                return new SpaLayerConfigurations
+                {
+                    ServePath = $"{SpaProjectPath}/ClientApp/public",
+                };
+            }
+        }
+
+        private SpaLayerBuilderOptions SpaLayerBuilderOptions
+        {
+            get {
+                return new SpaLayerBuilderOptions
+                {
+                    SourcePath = $"{SpaProjectPath}/ClientApp",
+                };
+            }
         }
     }
 
