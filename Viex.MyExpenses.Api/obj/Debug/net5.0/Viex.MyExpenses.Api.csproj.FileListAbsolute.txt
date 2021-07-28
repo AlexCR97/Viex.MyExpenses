@@ -65,3 +65,8 @@ D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\obj\Debug\net5.0\Viex.M
 D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\obj\Debug\net5.0\ref\Viex.MyExpenses.Api.dll
 D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\obj\Debug\net5.0\Viex.MyExpenses.Api.pdb
 D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\obj\Debug\net5.0\Viex.MyExpenses.Api.genruntimeconfig.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\bin\Debug\net5.0\appsettings.Local.Development.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\bin\Debug\net5.0\appsettings.Local.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\bin\Debug\net5.0\appsettings.Production.Development.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\bin\Debug\net5.0\appsettings.Production.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

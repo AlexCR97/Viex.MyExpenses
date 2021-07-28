@@ -37,6 +37,8 @@
       </v-list-item>
     </v-list>
 
+    <LoadingDialog ref="loadingDialog"/>
+
   </v-navigation-drawer>
 </template>
 
@@ -44,18 +46,26 @@
 import api from "@/api";
 import timers from "@/utils/timers";
 import { Component, Vue } from "vue-property-decorator";
+import LoadingDialogComponent from "../LoadingDialog/LoadingDialog.vue";
 import { DefaultSideNavItems } from './SideNavItem'
 
 @Component
 export default class SideNavComponent extends Vue {
   
-    items = DefaultSideNavItems
+  items = DefaultSideNavItems
 
-    async onSignOutClicked() {
-      await api.auth.signOut()
-      this.$router.push('/')
-      await timers.wait(500)
-      window.location.reload()
-    }
+  async onSignOutClicked() {
+    this.loadingDialog.open({ title: 'Signing Out' })
+    await api.auth.signOut()
+    this.$router.push('/')
+    await timers.wait(500)
+    this.loadingDialog.close()
+    window.location.reload()
+  }
+
+  private get loadingDialog() {
+    return this.$refs.loadingDialog as LoadingDialogComponent
+  }
+
 }
 </script>

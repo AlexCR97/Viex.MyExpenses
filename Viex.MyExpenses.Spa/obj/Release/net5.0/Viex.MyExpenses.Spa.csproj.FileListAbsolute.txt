@@ -1,0 +1,12 @@
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\bin\Release\net5.0\Viex.MyExpenses.Spa.deps.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\bin\Release\net5.0\Viex.MyExpenses.Spa.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\bin\Release\net5.0\ref\Viex.MyExpenses.Spa.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\bin\Release\net5.0\Viex.MyExpenses.Spa.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.csprojAssemblyReference.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.AssemblyInfoInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.AssemblyInfo.cs
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.csproj.CoreCompileInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\ref\Viex.MyExpenses.Spa.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Spa\obj\Release\net5.0\Viex.MyExpenses.Spa.pdb

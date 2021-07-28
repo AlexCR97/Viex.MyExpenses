@@ -23,6 +23,12 @@ namespace Viex.MyExpenses.Api.Controllers
             return await _service.Create(transaction);
         }
 
+        [HttpDelete("{id}")]
+        public async Task DeleteAll(long id)
+        {
+            await _service.Delete(id);
+        }
+
         [HttpDelete("all")]
         public async Task DeleteAll()
         {

@@ -13,4 +13,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Backups\" />
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,6 @@
 import { TransactionEntry } from "@/models/TransactionEntry";
 import { WeeklyTransactions } from "@/models/WeeklyTransactions";
 import { WeeklyTransactionsSearchParams } from "@/models/WeeklyTransactionsSearchParams";
-import storage from "@/storage";
 import { isNull } from "@/utils/validators";
 import axios from "axios";
 import { BaseApi } from "./BaseApi";
@@ -11,15 +10,19 @@ export class TransactionEntriesApi extends BaseApi {
     endpoint: string = 'transactionEntries';
     
     async create(transaction: TransactionEntry) {
-        transaction.userId = storage.getUserId(); // TODO Set in backend
         safeParseForPost(transaction)
         const response = await axios.post<TransactionEntry>(this.uri, transaction)
         return response.data
     }
 
+    async delete(id: number) {
+        const uri = `${this.uri}/${id}`
+        await axios.delete(uri)
+    }
+
     async deleteAll() {
-        const uri = `${this.uri}/all`;
-        await axios.delete(uri);
+        const uri = `${this.uri}/all`
+        await axios.delete(uri)
     }
 
     async getWeeklyTransactions(searchParams?: WeeklyTransactionsSearchParams) {

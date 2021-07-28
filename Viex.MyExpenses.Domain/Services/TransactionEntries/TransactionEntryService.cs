@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Viex.MyExpenses.Domain.Contexts.Session;
 using Viex.MyExpenses.Domain.Models;
 using Viex.MyExpenses.Domain.Providers.Csv;
 using Viex.MyExpenses.Persistence.Entities;
@@ -15,6 +16,7 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
     public interface ITransactionEntryService
     {
         Task<TransactionEntryModel> Create(TransactionEntryModel transaction);
+        Task Delete(long id);
         Task DeleteAll();
         Task<IEnumerable<TransactionEntryModel>> GetAll();
         Task<WeeklyTransactions> GetWeeklyTransactions(WeeklyTransactionsSearchParams searchParams);
@@ -25,12 +27,14 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
     public class TransactionEntryService : ITransactionEntryService
     {
         private readonly ICsvProvider _csv;
+        private readonly ISessionContext _session;
         private readonly ITransactionEntriesRepository _transactions;
         private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptors;
 
-        public TransactionEntryService(ICsvProvider csv, ITransactionEntriesRepository transactions, ITransactionTypeDescriptorsRepository transactionTypeDescriptors)
+        public TransactionEntryService(ICsvProvider csv, ISessionContext session, ITransactionEntriesRepository transactions, ITransactionTypeDescriptorsRepository transactionTypeDescriptors)
         {
             _csv = csv;
+            _session = session;
             _transactions = transactions;
             _transactionTypeDescriptors = transactionTypeDescriptors;
         }
@@ -41,13 +45,18 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
             transaction.DateCreated = DateTime.Now;
             transaction.Type = null;
             transaction.User = null;
-            //transaction.UserId = _session.UserId; // TODO Get from session context
+            transaction.UserId = _session.UserId;
             
             var entity = transaction.AsEntity();
             var transactionId = await _transactions.Create(entity);
             var createdTransaction = await _transactions.GetById(transactionId);
 
             return createdTransaction.AsModel();
+        }
+
+        public async Task Delete(long id)
+        {
+            await _transactions.Delete(id);
         }
 
         public async Task DeleteAll()
@@ -154,7 +163,7 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
                     DateCreated = DateTime.Parse(row.Date),
                     Description = row.Description,
                     TypeId = type.TransactionTypeDescriptorId,
-                    UserId = 5, // TODO Get from current user session
+                    UserId = _session.UserId,
                 });
             }
         }

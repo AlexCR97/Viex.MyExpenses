@@ -1,21 +1,28 @@
 import { User } from "@/models/User";
+import jwtDecode from "jwt-decode";
 
 const keys = {
+    accessToken: 'viex.expenses.accessToken',
     user: 'viex.expenses.user',
 }
 
 export default {
+    getAccessToken() {
+        return localStorage.getItem(keys.accessToken)
+    },
+
     getUserId() {
-        const user = getObject<User>(keys.user)
-        return user.userId
+        const accessToken = this.getAccessToken();
+        const claims = jwtDecode<any>(accessToken);
+        return Number(claims.userId)
     },
 
-    removeUser() {
-        localStorage.removeItem(keys.user)
+    removeAccessToken() {
+        localStorage.removeItem(keys.accessToken)
     },
 
-    setUser(user: User) {
-        setObject(keys.user, user)
+    setAccessToken(accessToken: string) {
+        localStorage.setItem(keys.accessToken, accessToken)
     }
 }
 

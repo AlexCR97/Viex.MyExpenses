@@ -3,6 +3,7 @@
     <v-main>
       <router-view/>
     </v-main>
+    <vue-snotify></vue-snotify>
   </v-app>
 </template>
 

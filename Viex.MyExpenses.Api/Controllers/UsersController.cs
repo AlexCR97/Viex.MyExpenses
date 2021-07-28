@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Viex.MyExpenses.Api.Controllers
             _users = users;
         }
 
-        [HttpPost("signUp")]
+        [HttpPost("signUp"), AllowAnonymous]
         public async Task<UserModel> SignUp([FromBody] SignUpModel model)
         {
             return await _users.SignUp(model);
