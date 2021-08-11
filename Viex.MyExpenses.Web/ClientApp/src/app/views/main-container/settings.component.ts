@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+const template = /*html*/`
+<div style="height: 50px">
+  <app-header title="Settings"></app-header>
+</div>
+`
+
 @Component({
   selector: 'app-settings',
-  template: `
-    <p>
-      settings works!
-    </p>
-  `,
-  styles: [
-  ]
+  template,
 })
 export class SettingsComponent implements OnInit {
 

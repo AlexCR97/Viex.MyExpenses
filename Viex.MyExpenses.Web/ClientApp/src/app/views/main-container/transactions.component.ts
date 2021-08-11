@@ -37,6 +37,8 @@ const template = /*html*/`
   </div>
 
 </div>
+
+<app-fab icon="plus"></app-fab>
 `
 
 @Component({

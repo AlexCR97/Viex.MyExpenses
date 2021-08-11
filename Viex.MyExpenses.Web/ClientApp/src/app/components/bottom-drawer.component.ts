@@ -1,7 +1,8 @@
 import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Offcanvas } from '../plugins/bootstrap';
+import { Offcanvas } from '../plugins/bootstrap.plugin';
+import { notNull } from '../utils/validators';
 import { SideNavigationItem } from './SideNavigator/SideNavigationItem';
 
 const template = /*html*/`
@@ -25,7 +26,7 @@ export class BottomDrawerComponent implements OnInit {
   @Input() set opened(opened: boolean) {
     this._opened = opened;
 
-    if (this.drawer != undefined && this.drawer != null) {
+    if (notNull(this.drawer)) {
       if (opened == true)
         this.open()
       else
@@ -45,7 +46,7 @@ export class BottomDrawerComponent implements OnInit {
     this.drawerHtmlElement = document.getElementById('appBottomDrawer')
     this.drawer = new Offcanvas(this.drawerHtmlElement)
     this.drawerHtmlElement.addEventListener('hidden.bs.offcanvas', () => {
-      this.opened = false
+      this._opened = false // Do not trigger inner @Input
       this.openedChange.emit(this.opened)
     })
   }

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TransactionEntry } from 'src/app/models/TransactionEntry';
 import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
+import timers from 'src/app/utils/timers';
 import { notNull } from 'src/app/utils/validators';
 
 const template = /*html*/`
@@ -39,7 +40,7 @@ const template = /*html*/`
       </div>
     </div>
 
-    <div class="list-group-item list-group-item-action py-3">
+    <div class="list-group-item list-group-item-action py-3" (click)="onDeleteClicked()">
       <div class="d-flex align-items-center">
         <i class="bi bi-trash text-danger ms-2 me-3"></i>
         <h6 class="text-danger m-0">Delete</h6>
@@ -48,6 +49,15 @@ const template = /*html*/`
 
   </div>
 </app-bottom-drawer>
+
+<app-confirm-modal
+  [(opened)]="confirmModalOpened"
+  (confirmed)="onDeleteConfirmed()">
+</app-confirm-modal>
+
+<app-loading-modal
+  [(opened)]="loadingModalOpened">
+</app-loading-modal>
 `
 
 @Component({
@@ -59,6 +69,8 @@ export class TransactionItemComponent implements OnInit {
   @Input() transaction = new TransactionEntry()
 
   bottomDrawerOpened = false
+  confirmModalOpened = false
+  loadingModalOpened = false
 
   constructor() { }
 
@@ -94,7 +106,18 @@ export class TransactionItemComponent implements OnInit {
 
   onClicked() {
     this.bottomDrawerOpened = true
+  }
 
+  onDeleteClicked() {
+    console.log("this.confirmModalOpened:", this.confirmModalOpened);
+    this.confirmModalOpened = true;
+  }
+
+  async onDeleteConfirmed() {
+    this.loadingModalOpened = true
+    await timers.wait(2000);
+    this.loadingModalOpened = false
+    this.bottomDrawerOpened = false
   }
 
 }

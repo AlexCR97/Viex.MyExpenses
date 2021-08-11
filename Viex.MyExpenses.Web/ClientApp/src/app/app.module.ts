@@ -16,6 +16,9 @@ import { TransactionListComponent } from './components/transaction-list/transact
 import { TransactionItemComponent } from './components/transaction-list/transaction-item.component';
 import { IconButtonComponent } from './components/icon-button.component';
 import { BottomDrawerComponent } from './components/bottom-drawer.component';
+import { FabComponent } from './components/fab.component';
+import { ConfirmModalComponent } from './components/modals/confirm-modal.component';
+import { LoadingModalComponent } from './components/modals/loading-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { BottomDrawerComponent } from './components/bottom-drawer.component';
     TransactionListComponent,
     TransactionItemComponent,
     IconButtonComponent,
-    BottomDrawerComponent
+    BottomDrawerComponent,
+    FabComponent,
+    ConfirmModalComponent,
+    LoadingModalComponent
   ],
   imports: [
     BrowserModule,

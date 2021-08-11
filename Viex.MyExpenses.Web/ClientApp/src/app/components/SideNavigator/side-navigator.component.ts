@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Router } from '@angular/router';
-import { Offcanvas } from '../../plugins/bootstrap'
+import { Offcanvas } from '../../plugins/bootstrap.plugin'
 import { DefaultSideNavigationItems, SideNavigationItem } from './SideNavigationItem';
 
 const template = /*html*/`

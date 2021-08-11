@@ -1,5 +1,6 @@
 import {
+    Modal,
     Offcanvas,
 } from 'bootstrap/dist/js/bootstrap.esm.min.js'
 
-export { Offcanvas }
+export { Modal, Offcanvas }
