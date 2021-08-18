@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "serve": "ng serve",
-    "build": "ng build",
-    "gc": "ng g c --flat --inline-style --inline-template --skip-tests"
+    "build:prod": "ng build",
+    "gc": "ng g c --flat --inline-style --inline-template --skip-tests",
+    "gs": "ng g service --skip-tests"
   },
   "private": true,
   "dependencies": {
@@ -16,10 +17,13 @@
     "@angular/platform-browser": "~9.1.6",
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
+    "@angular/service-worker": "~9.1.6",
     "@popperjs/core": "^2.9.3",
     "bootstrap": "^5.1.0",
     "bootstrap-icons": "^1.5.0",
+    "fluentvalidation-ts": "^2.2.2",
     "jquery": "^3.6.0",
+    "jwt-decode": "^3.1.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

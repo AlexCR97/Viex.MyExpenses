@@ -14,7 +14,7 @@ const template = /*html*/`
     
     <div class="me-auto">
       <p class="m-0">{{transaction.description}}</p>
-      <p *ngIf="hasCategory" class="m-0" style="color: gray; font-size: 14px">{{transaction.category.description}}</p>
+      <p *ngIf="hasCategory" class="m-0" style="color: gray; font-size: 14px">{{transaction.category}}</p>
     </div>
 
   </div>
@@ -97,11 +97,11 @@ export class TransactionItemComponent implements OnInit {
   }
 
   get isExpense() {
-    return this.transaction.type.description == TransactionType.expense
+    return this.transaction.type == TransactionType.expense
   }
 
   get isIncome() {
-    return this.transaction.type.description == TransactionType.income
+    return this.transaction.type == TransactionType.income
   }
 
   onClicked() {

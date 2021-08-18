@@ -8,20 +8,14 @@ const template = /*html*/`
     
     <div class="card shadow">
       <div class="card-body p-4">
+
+        <app-text-field icon="envelope" placeholder="Email" type="email"></app-text-field>
+        <div class="mb-4"></div>
+        
+        <app-text-field icon="lock" placeholder="Password" type="password"></app-text-field>
+        <div class="mb-4"></div>
   
-        <div class="d-flex align-items-center mb-3">  
-          <i class="bi bi-envelope"></i>
-          <div class="mx-2"></div>
-          <input class="form-control" placeholder="Email" type="email">
-        </div>
-  
-        <div class="d-flex align-items-center mb-3">
-          <i class="bi bi-lock"></i>
-          <div class="mx-2"></div>
-          <input class="form-control" placeholder="Password" type="password">
-        </div>
-  
-        <button class="btn btn-primary mb-3" style="width: 100%" (click)="onLoginClicked()">Login</button>
+        <button class="btn btn-primary mb-4" style="width: 100%" (click)="onLoginClicked()">Login</button>
   
         <div class="d-flex justify-content-center">
           <button class="btn btn-link m-0">

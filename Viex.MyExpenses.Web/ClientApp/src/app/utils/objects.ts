@@ -45,5 +45,15 @@ export default {
             var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
-    }
+    },
+
+    watch<T extends object>(target: T, listener: (property: string, value: any) => void) {
+        return new Proxy(target, {
+            set(obj, prop, value) {
+                obj[prop] = value
+                listener(prop as string, value)
+                return true
+            }
+        })
+    },
 }

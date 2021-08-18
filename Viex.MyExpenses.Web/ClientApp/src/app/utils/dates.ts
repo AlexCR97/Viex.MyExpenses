@@ -1,5 +1,19 @@
-const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ]
-const dayNames = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+export const MonthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ]
+export const DayNames = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+export const DaysInMonth = new Map<string, number>([
+    [ 'January', 31 ],
+    [ 'February', 28 ],
+    [ 'March', 31 ],
+    [ 'April', 30 ],
+    [ 'May', 31 ],
+    [ 'June', 30 ],
+    [ 'July', 31 ],
+    [ 'August', 31 ],
+    [ 'September', 30 ],
+    [ 'October', 31 ],
+    [ 'November', 30 ],
+    [ 'December', 31 ],
+])
 
 export default {
     addDays(date: Date, days: number): Date {
@@ -43,7 +57,7 @@ export default {
             date = new Date(date)
         
         const day = date.getDay()
-        return dayNames[day]
+        return DayNames[day]
     },
 
     firstOfCurrentWeek(): Date {
@@ -64,7 +78,7 @@ export default {
             date = new Date(date)
         
         const month = date.getMonth()
-        return monthNames[month];
+        return MonthNames[month];
     },
 
     short(date: string | Date): string {

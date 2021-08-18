@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 const template = /*html*/`
 <div style="height: 50px">
-  <app-header title="Home"></app-header>
+  <app-header title="Home" variant="menu"></app-header>
 </div>
 `
 

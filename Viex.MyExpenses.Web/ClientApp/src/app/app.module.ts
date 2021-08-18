@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainContainerComponent } from './views/main-container/main-container.component';
 import { LoginComponent } from './views/login.component';
-import { TransactionsComponent } from './views/main-container/transactions.component';
+import { TransactionsComponent } from './views/main-container/transactions/transactions.component';
 import { HomeComponent } from './views/main-container/home.component';
 import { SettingsComponent } from './views/main-container/settings.component';
 import { HeaderComponent } from './components/header.component';
@@ -19,6 +20,13 @@ import { BottomDrawerComponent } from './components/bottom-drawer.component';
 import { FabComponent } from './components/fab.component';
 import { ConfirmModalComponent } from './components/modals/confirm-modal.component';
 import { LoadingModalComponent } from './components/modals/loading-modal.component';
+import { TransactionDetailsComponent } from './views/main-container/transactions/transaction-details.component';
+import { TextFieldComponent } from './components/text-field.component';
+import { SelectComponent } from './components/select.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ToastComponent } from './components/toast.component';
+import { DatePickerComponent } from './components/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +46,18 @@ import { LoadingModalComponent } from './components/modals/loading-modal.compone
     BottomDrawerComponent,
     FabComponent,
     ConfirmModalComponent,
-    LoadingModalComponent
+    LoadingModalComponent,
+    TransactionDetailsComponent,
+    TextFieldComponent,
+    SelectComponent,
+    ToastComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

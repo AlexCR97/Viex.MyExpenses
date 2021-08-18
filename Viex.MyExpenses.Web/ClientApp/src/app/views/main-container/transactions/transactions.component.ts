@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
 import { WeeklyTransactionsEntry } from 'src/app/models/WeeklyTransactionsEntry';
 import arrays from 'src/app/utils/arrays';
@@ -7,7 +8,7 @@ import { notNullNorEmpty } from 'src/app/utils/validators';
 
 const template = /*html*/`
 <div style="height: 50px">
-  <app-header title="Transactions"></app-header>
+  <app-header title="Transactions" variant="menu"></app-header>
 </div>
 
 <div class="py-4">
@@ -38,7 +39,7 @@ const template = /*html*/`
 
 </div>
 
-<app-fab icon="plus"></app-fab>
+<app-fab icon="plus" (clicked)="onAddTransactionClicked()"></app-fab>
 `
 
 @Component({
@@ -49,7 +50,9 @@ export class TransactionsComponent implements OnInit {
 
   weeklyTransactions: WeeklyTransactionsEntry[];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.init();
@@ -67,6 +70,10 @@ export class TransactionsComponent implements OnInit {
     return notNullNorEmpty(item.transactions)
   }
 
+  onAddTransactionClicked() {
+    this.router.navigateByUrl('/app/transactions/new')
+  }
+
   private async init() {
     this.weeklyTransactions = [
       {
@@ -75,23 +82,13 @@ export class TransactionsComponent implements OnInit {
         totalIncome: 0,
         transactions: arrays.fromRange(0, 3).map(index => ({
           amount: 100,
-          category: {
-            categoryDescriptorId: undefined,
-            dateCreated: new Date(),
-            dateUpdated: new Date(),
-            description: 'Category',
-          },
+          category: 'Category',
           categoryId: undefined,
           dateCreated: new Date(),
           dateUpdated: new Date(),
           description: 'This is a transaction',
           transactionEntryId: undefined,
-          type: {
-            dateCreated: new Date(),
-            dateUpdated: new Date(),
-            description: index % 2 == 0 ? TransactionType.expense : TransactionType.income,
-            transactionTypeDescriptorId: undefined,
-          },
+          type: index % 2 == 0 ? TransactionType.expense : TransactionType.income,
           typeId: undefined,
           user: {
             dateCreated: new Date(),

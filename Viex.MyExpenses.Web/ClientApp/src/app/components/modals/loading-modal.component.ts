@@ -1,15 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Modal } from 'src/app/plugins/bootstrap.plugin';
-import { notNull } from 'src/app/utils/validators';
+import { notNull, notNullNorWhitespace } from 'src/app/utils/validators';
 
 const template = /*html*/`
 <div id="loadingModal" class="modal fade" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="d-flex justify-content-center" style="width: 100%">
-      <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status">
-        <span class="visually-hidden">Loading...</span>
+
+    <div style="width: 100%">
+      <h5 *ngIf="hasMessage" class="text-center text-light">{{message}}</h5>
+      <div class="d-flex justify-content-center" style="width: 100%">
+        <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 `
@@ -34,6 +39,8 @@ export class LoadingModalComponent implements OnInit {
   }
   @Output() openedChange = new EventEmitter<boolean>();
 
+  @Input() message: string
+
   private modalHtmlElement: HTMLElement
   private modal: any
 
@@ -51,6 +58,10 @@ export class LoadingModalComponent implements OnInit {
       this._opened = false // Do not trigger inner @Input
       this.openedChange.emit(this.opened)
     })
+  }
+
+  get hasMessage() {
+    return notNullNorWhitespace(this.message)
   }
 
   private close() {

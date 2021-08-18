@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 const template = /*html*/`
 <div class="fab-container">
-  <button class="btn fab-button" [ngClass]="fabClass">
-    <i class="bi" [ngClass]="iconClass"></i>
+  <button class="btn fab-button" [ngClass]="fabClass" (click)="onClicked()">
+    <i class="bi" [ngClass]="iconClass" [ngStyle]="iconStyle"></i>
   </button>
 </div>
 `
@@ -18,8 +18,8 @@ const styles = [/*css*/`
 
 .fab-button {
   border-radius: 100%;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +31,7 @@ const styles = [/*css*/`
 
 .fab-button .bi {
   color: whitesmoke;
-  font-size: 28px;
+  font-size: 36px;
 }
 `]
 
@@ -43,6 +43,7 @@ const styles = [/*css*/`
 export class FabComponent implements OnInit {
 
   @Input() icon: string
+  @Input() iconStyle: any
   @Input() variant: "primary" | "secondary" | "success" | "danger" = "primary"
 
   @Output() clicked = new EventEmitter<void>();
