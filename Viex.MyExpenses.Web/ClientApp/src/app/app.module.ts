@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,14 +19,14 @@ import { TransactionItemComponent } from './components/transaction-list/transact
 import { IconButtonComponent } from './components/icon-button.component';
 import { BottomDrawerComponent } from './components/bottom-drawer.component';
 import { FabComponent } from './components/fab.component';
-import { ConfirmModalComponent } from './components/modals/confirm-modal.component';
-import { LoadingModalComponent } from './components/modals/loading-modal.component';
+import { ConfirmModalComponent } from './components/modals/ConfirmModal/confirm-modal.component';
+import { LoadingModalComponent } from './components/modals/LoadingModal/loading-modal.component';
 import { TransactionDetailsComponent } from './views/main-container/transactions/transaction-details.component';
 import { TextFieldComponent } from './components/text-field.component';
 import { SelectComponent } from './components/select.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ToastComponent } from './components/toast.component';
+import { ToastComponent } from './components/Toast/toast.component';
 import { DatePickerComponent } from './components/date-picker.component';
 
 @NgModule({
@@ -57,6 +58,7 @@ import { DatePickerComponent } from './components/date-picker.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

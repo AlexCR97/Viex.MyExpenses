@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Router } from '@angular/router';
+import storage from 'src/app/storage';
 import { Offcanvas } from '../../plugins/bootstrap.plugin'
 import { DefaultSideNavigationItems, SideNavigationItem } from './SideNavigationItem';
 
@@ -50,7 +51,7 @@ export class DrawerComponent implements OnInit {
     {
       icon: 'box-arrow-right',
       label: 'Sign Out',
-      click: () => this.router.navigateByUrl('/login'),
+      click: () => this.onSignOutClicked(),
     },
   ]
   
@@ -87,6 +88,11 @@ export class DrawerComponent implements OnInit {
       item.click()
     
     this.close();
+  }
+
+  onSignOutClicked() {
+    storage.local.removeAccessToken()
+    this.router.navigateByUrl('/login')
   }
 
   private open() {

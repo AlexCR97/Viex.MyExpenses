@@ -50,12 +50,12 @@ namespace Viex.MyExpenses.Domain.Services.Authentication
             var refreshTokenExpirationDays = Convert.ToInt32(_config["Authentication:RefreshTokenExpirationDays"]);
 
             var token = new JwtSecurityToken(
-                  _config["Authentication:Issuer"],
-                  _config["Authentication:Audience"],
-                  expires: DateTime.Now.AddMinutes(accessTokenExpirationMinutes),
-                  claims: GetClaims(user),
-                  signingCredentials: credentials
-              );
+                _config["Authentication:Issuer"],
+                _config["Authentication:Audience"],
+                expires: DateTime.Now.AddMinutes(accessTokenExpirationMinutes),
+                claims: GetClaims(user),
+                signingCredentials: credentials
+            );
 
             var refreshToken = new JwtSecurityToken(
                 _config["Authentication:Issuer"],

@@ -5,7 +5,7 @@ const template = /*html*/`
 <h6 *ngIf="hasLabel" class="ms-1">{{label}}</h6>
 <div class="input-group">
   <span *ngIf="hasIcon" class="input-group-text" [ngClass]="iconClass"></span>
-  <input class="form-control" [placeholder]="placeholderValue" [readonly]="readonly" [type]="type" [(ngModel)]="value" (change)="onValueChanged()">
+  <input class="form-control" [placeholder]="placeholderValue" [readonly]="readonly" [type]="type" [(ngModel)]="value" (change)="onValueChanged()" (keyup.enter)="onKeyEnterPressed()">
   <button *ngIf="hasAction" class="btn btn-outline-secondary d-flex justify-content-center align-items-center" (click)="onActionClicked()">
     <span [ngClass]="actionClass"></span>
   </button>
@@ -65,6 +65,7 @@ export class TextFieldComponent implements OnInit {
   @Input() type: string
 
   @Output() actionClicked = new EventEmitter<void>()
+  @Output() enter = new EventEmitter<void>()
 
   constructor() { }
 
@@ -116,6 +117,11 @@ export class TextFieldComponent implements OnInit {
 
   onActionClicked() {
     this.actionClicked.emit()
+  }
+
+  onKeyEnterPressed() {
+    console.log("onKeyEnterPressed CHILD");
+    this.enter.emit()
   }
 
   onValueChanged() {

@@ -49,15 +49,6 @@ const template = /*html*/`
 
   </div>
 </app-bottom-drawer>
-
-<app-confirm-modal
-  [(opened)]="confirmModalOpened"
-  (confirmed)="onDeleteConfirmed()">
-</app-confirm-modal>
-
-<app-loading-modal
-  [(opened)]="loadingModalOpened">
-</app-loading-modal>
 `
 
 @Component({
@@ -70,7 +61,6 @@ export class TransactionItemComponent implements OnInit {
 
   bottomDrawerOpened = false
   confirmModalOpened = false
-  loadingModalOpened = false
 
   constructor() { }
 
@@ -114,9 +104,8 @@ export class TransactionItemComponent implements OnInit {
   }
 
   async onDeleteConfirmed() {
-    this.loadingModalOpened = true
+    // TODO Use loading modal
     await timers.wait(2000);
-    this.loadingModalOpened = false
     this.bottomDrawerOpened = false
   }
 

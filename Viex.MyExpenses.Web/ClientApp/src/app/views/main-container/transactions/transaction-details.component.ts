@@ -2,6 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors';
+import { ConfirmModalService } from 'src/app/components/modals/ConfirmModal/confirm-modal.service';
+import { LoadingModalService } from 'src/app/components/modals/LoadingModal/loading-modal.service';
+import { ToastService } from 'src/app/components/Toast/toast.service';
 import { TransactionEntry, TransactionEntryValidator } from 'src/app/models/TransactionEntry';
 import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
 import arrays from 'src/app/utils/arrays';
@@ -34,12 +37,6 @@ const template = /*html*/`
 </div>
 
 <app-fab icon="save2" [iconStyle]="{ 'font-size': '26px' }" (clicked)="onSaveClicked()"></app-fab>
-
-<app-loading-modal message="Saving Transaction" [(opened)]="loadingModalOpened"></app-loading-modal>
-
-<app-toast message="Transaction Saved" variant="success" [(opened)]="successToastOpened"></app-toast>
-
-<app-toast message="Could not save transaction" variant="danger" [(opened)]="errorToastOpened"></app-toast>
 `
 
 @Component({
@@ -53,15 +50,13 @@ export class TransactionDetailsComponent implements OnInit {
   categories = arrays.fromRange(0, 5).map(index => `Category ${index + 1}`)
   types = [ TransactionType.expense, TransactionType.income ]
 
-  loadingModalOpened = false
-  successToastOpened = false
-  errorToastOpened = false
-
   private transactionValidator = new TransactionEntryValidator()
 
   constructor(
+    private loadingModal: LoadingModalService,
     private location: Location,
     private router: Router,
+    private toast: ToastService,
   ) { }
 
   ngOnInit(): void {
@@ -97,10 +92,10 @@ export class TransactionDetailsComponent implements OnInit {
   }
 
   private async saveTransaction() {
-    this.loadingModalOpened = true
+    this.loadingModal.open({ message: 'Saving Transaction' })
     await timers.wait(2000)
-    this.loadingModalOpened = false
-    this.successToastOpened = true
+    this.loadingModal.close()
+    this.toast.open({ message: 'Transaction Saved', variant: 'success' })
     //await timers.wait(100)
     //this.router.navigateByUrl('/app/transactions')
   }

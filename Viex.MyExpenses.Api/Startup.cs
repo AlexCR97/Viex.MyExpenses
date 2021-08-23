@@ -58,8 +58,9 @@ namespace Viex.MyExpenses.Api
             {
                 var allowedOrigins = new string[]
                 {
-                    "http://localhost:8080",
-                    "https://myexpensesstorage.z19.web.core.windows.net",
+                    "http://localhost:8080", // Vue SPA
+                    "http://localhost:4200", // Angular SPA
+                    "https://myexpensesstorage.z19.web.core.windows.net", // Hosted SPA
                 };
 
                 options
