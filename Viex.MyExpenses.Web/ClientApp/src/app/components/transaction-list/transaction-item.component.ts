@@ -3,6 +3,8 @@ import { TransactionEntry } from 'src/app/models/TransactionEntry';
 import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
 import timers from 'src/app/utils/timers';
 import { notNull } from 'src/app/utils/validators';
+import { ConfirmModalService } from '../modals/ConfirmModal/confirm-modal.service';
+import { LoadingModalService } from '../modals/LoadingModal/loading-modal.service';
 
 const template = /*html*/`
 <div class="list-group-item p-0 py-3 pe-2" (click)="onClicked()">
@@ -60,12 +62,13 @@ export class TransactionItemComponent implements OnInit {
   @Input() transaction = new TransactionEntry()
 
   bottomDrawerOpened = false
-  confirmModalOpened = false
 
-  constructor() { }
+  constructor(
+    private confirmModal: ConfirmModalService,
+    private loadingModal: LoadingModalService,
+  ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   get amount(): string {
     const operator = this.isExpense
@@ -99,14 +102,18 @@ export class TransactionItemComponent implements OnInit {
   }
 
   onDeleteClicked() {
-    console.log("this.confirmModalOpened:", this.confirmModalOpened);
-    this.confirmModalOpened = true;
+    this.confirmModal.open({
+      title: 'Delete Transaction',
+      message: 'Do you really want to delete this transaction?',
+      onConfirm: () => this.onDeleteConfirmed(),
+    })
   }
 
   async onDeleteConfirmed() {
-    // TODO Use loading modal
+    this.loadingModal.open({ title: 'Deleting Transaction' })
     await timers.wait(2000);
     this.bottomDrawerOpened = false
+    this.loadingModal.close()
   }
 
 }

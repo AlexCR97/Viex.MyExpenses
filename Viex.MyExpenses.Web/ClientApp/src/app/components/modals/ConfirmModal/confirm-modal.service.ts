@@ -32,9 +32,9 @@ export class ConfirmModalService extends BaseModalService<ConfirmModalOptions> {
 }
 
 export interface ConfirmModalOptions extends ModalOptions {
-  message: string
-  textCancel: string
-  textConfirm: string
+  message?: string
+  textCancel?: string
+  textConfirm?: string
   onConfirm?: () => void
   onConfirmAsync?: () => Promise<void>
 }
