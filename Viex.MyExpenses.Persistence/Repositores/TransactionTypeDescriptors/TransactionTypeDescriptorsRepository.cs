@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Viex.MyExpenses.Persistence.Entities;
 
-namespace Viex.MyExpenses.Persistence.Repositores
+namespace Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors
 {
     public interface ITransactionTypeDescriptorsRepository : IRepository<TransactionTypeDescriptor>
     {
@@ -48,7 +48,7 @@ namespace Viex.MyExpenses.Persistence.Repositores
             return await _context.TransactionTypeDescriptors.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<TransactionTypeDescriptor>> GetWhere(Expression<Func<TransactionTypeDescriptor, bool>> predicate)
+        public async Task<IList<TransactionTypeDescriptor>> GetWhere(Expression<Func<TransactionTypeDescriptor, bool>> predicate)
         {
             return await _context.TransactionTypeDescriptors
                 .Where(predicate)

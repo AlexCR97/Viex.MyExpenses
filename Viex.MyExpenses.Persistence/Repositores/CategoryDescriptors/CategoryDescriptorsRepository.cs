@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Persistence.Entities;
 
-namespace Viex.MyExpenses.Persistence.Repositores
+namespace Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors
 {
     public interface ICategoryDescriptorsRepository : IRepository<CategoryDescriptor>
     {
@@ -48,7 +46,7 @@ namespace Viex.MyExpenses.Persistence.Repositores
             return await _context.CategoryDescriptors.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<CategoryDescriptor>> GetWhere(Expression<Func<CategoryDescriptor, bool>> predicate)
+        public async Task<IList<CategoryDescriptor>> GetWhere(Expression<Func<CategoryDescriptor, bool>> predicate)
         {
             return await _context.CategoryDescriptors
                 .Where(predicate)

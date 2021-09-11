@@ -1,4 +1,4 @@
-﻿namespace Viex.MyExpenses.Persistence.Entities
+﻿namespace Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors
 {
     public class CategoryDescriptor : BaseDescriptor
     {

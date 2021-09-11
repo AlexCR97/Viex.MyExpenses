@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Persistence.Entities;
 
-namespace Viex.MyExpenses.Persistence.Repositores
+namespace Viex.MyExpenses.Persistence.Repositores.Users
 {
     public interface IUsersRepository : IRepository<User>
     {
@@ -48,7 +46,7 @@ namespace Viex.MyExpenses.Persistence.Repositores
             return await _context.Users.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<User>> GetWhere(Expression<Func<User, bool>> predicate)
+        public async Task<IList<User>> GetWhere(Expression<Func<User, bool>> predicate)
         {
             return await _context.Users
                 .Where(predicate)

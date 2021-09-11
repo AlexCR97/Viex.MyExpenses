@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Spa\\Viex.MyExpenses.Spa.csproj": {}
+    "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Core\\Viex.MyExpenses.Core.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Spa\\Viex.MyExpenses.Spa.csproj": {
+    "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Core\\Viex.MyExpenses.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Spa\\Viex.MyExpenses.Spa.csproj",
-        "projectName": "Viex.MyExpenses.Spa",
-        "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Spa\\Viex.MyExpenses.Spa.csproj",
+        "projectUniqueName": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Core\\Viex.MyExpenses.Core.csproj",
+        "projectName": "Viex.MyExpenses.Core",
+        "projectPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Core\\Viex.MyExpenses.Core.csproj",
         "packagesPath": "C:\\Users\\carp_\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Spa\\obj\\",
+        "outputPath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\carp_\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,17 +40,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.AspNetCore.SpaServices": {
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
-              "version": "[3.1.17, )"
-            },
-            "Microsoft.AspNetCore.SpaServices.Extensions": {
-              "target": "Package",
-              "version": "[5.0.8, )"
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[5.0.2, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

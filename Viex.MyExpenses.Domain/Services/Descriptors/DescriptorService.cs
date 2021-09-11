@@ -13,8 +13,10 @@ namespace Viex.MyExpenses.Domain.Services
     {
         Task CreateCategories(IEnumerable<string> categories);
         Task CreateTransactionTypes(IEnumerable<string> transactionTypes);
-        Task<IEnumerable<CategoryDescriptorModel>> GetCategories();
-        Task<IEnumerable<TransactionTypeDescriptorModel>> GetTransactionTypes();
+        Task DropCategories();
+        Task DropTransactionTypes();
+        Task<IList<CategoryDescriptorModel>> GetCategories();
+        Task<IList<TransactionTypeDescriptorModel>> GetTransactionTypes();
     }
 
     public class DescriptorService : IDescriptorService
@@ -50,16 +52,24 @@ namespace Viex.MyExpenses.Domain.Services
                 await _transactionTypes.Create(descriptor);
         }
 
-        public async Task<IEnumerable<CategoryDescriptorModel>> GetCategories()
+        public async Task DropCategories() =>
+            await _categories.cle
+
+        public Task DropTransactionTypes()
         {
-            var categories = await _categories.GetWhere(_ => true);
-            return categories.Select(x => x.AsModel());
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<TransactionTypeDescriptorModel>> GetTransactionTypes()
+        public async Task<IList<CategoryDescriptorModel>> GetCategories()
+        {
+            var categories = await _categories.GetWhere(_ => true);
+            return categories.Select(x => x.AsModel()).ToList();
+        }
+
+        public async Task<IList<TransactionTypeDescriptorModel>> GetTransactionTypes()
         {
             var types = await _transactionTypes.GetWhere(_ => true);
-            return types.Select(type => type.AsModel());
+            return types.Select(type => type.AsModel()).ToList();
         }
     }
 }

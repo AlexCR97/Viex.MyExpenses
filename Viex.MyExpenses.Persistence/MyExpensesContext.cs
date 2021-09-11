@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Viex.MyExpenses.Persistence.Entities;
+using Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors;
+using Viex.MyExpenses.Persistence.Repositores.TransactionEntries;
+using Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors;
+using Viex.MyExpenses.Persistence.Repositores.Users;
 
 namespace Viex.MyExpenses.Persistence
 {
@@ -19,9 +19,7 @@ namespace Viex.MyExpenses.Persistence
 
     public static class DbContextExtensions
     {
-        public static void Clear<T>(this DbSet<T> dbSet) where T : class
-        {
+        public static void Clear<T>(this DbSet<T> dbSet) where T : class =>
             dbSet.RemoveRange(dbSet);
-        }
     }
 }

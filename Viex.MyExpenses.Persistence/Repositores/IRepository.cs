@@ -12,7 +12,7 @@ namespace Viex.MyExpenses.Persistence.Repositores
         Task Delete(long id);
         Task<T> GetById(long id);
         Task<T> GetFirst(Expression<Func<T, bool>> predicate);
-        Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate);
+        Task<IList<T>> GetWhere(Expression<Func<T, bool>> predicate);
         Task Update(T entity);
     }
 }
