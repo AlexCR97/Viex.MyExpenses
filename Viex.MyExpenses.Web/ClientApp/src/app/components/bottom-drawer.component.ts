@@ -51,25 +51,6 @@ export class BottomDrawerComponent implements OnInit {
     })
   }
 
-  getIconClass(item: SideNavigationItem) {
-    return [ 'bi', `bi-${item.icon}`];
-  }
-
-  getListItemClass(item: SideNavigationItem) {
-    return {
-      'active': this.router.url.includes(item.path),
-    };
-  }
-
-  onListItemClicked(item: SideNavigationItem) {
-    if (item.path)
-      this.router.navigateByUrl(item.path);
-    else if (item.click)
-      item.click()
-    
-    this.close();
-  }
-
   private open() {
     this.drawer.show()
   }

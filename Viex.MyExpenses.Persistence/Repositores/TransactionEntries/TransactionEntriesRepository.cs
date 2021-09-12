@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Persistence.Entities;
 
 namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
 {
@@ -49,8 +47,8 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
         {
             return await _context.TransactionEntries
                 .Where(s => s.TransactionEntryId == id)
-                .Include(s => s.Category)
-                .Include(s => s.Type)
+                .Include(s => s.CategoryDescriptor)
+                .Include(s => s.TransactionTypeDescriptor)
                 .FirstOrDefaultAsync();
         }
 
@@ -58,17 +56,17 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
         {
             return await _context.TransactionEntries
                 .Where(predicate)
-                .Include(s => s.Category)
-                .Include(s => s.Type)
+                .Include(s => s.CategoryDescriptor)
+                .Include(s => s.TransactionTypeDescriptor)
                 .FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<IEnumerable<TransactionEntry>> GetWhere(Expression<Func<TransactionEntry, bool>> predicate)
+        public async Task<IList<TransactionEntry>> GetWhere(Expression<Func<TransactionEntry, bool>> predicate)
         {
             return await _context.TransactionEntries
                 .Where(predicate)
-                .Include(s => s.Category)
-                .Include(s => s.Type)
+                .Include(s => s.CategoryDescriptor)
+                .Include(s => s.TransactionTypeDescriptor)
                 .ToListAsync();
         }
 
@@ -86,8 +84,8 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
             }
 
             return await transactions
-                .Include(x => x.Category)
-                .Include(x => x.Type)
+                .Include(x => x.CategoryDescriptor)
+                .Include(x => x.TransactionTypeDescriptor)
                 .ToListAsync();
         }
 

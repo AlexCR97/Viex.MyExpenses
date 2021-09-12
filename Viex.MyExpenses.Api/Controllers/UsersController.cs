@@ -21,10 +21,12 @@ namespace Viex.MyExpenses.Api.Controllers
             _users = users;
         }
 
+        [HttpGet, AllowAnonymous]
+        public async Task<IList<UserModel>> GetAll() =>
+            await _users.GetAll();
+
         [HttpPost("signUp"), AllowAnonymous]
-        public async Task<UserModel> SignUp([FromBody] SignUpModel model)
-        {
-            return await _users.SignUp(model);
-        }
+        public async Task<UserModel> SignUp([FromBody] SignUpModel model) =>
+            await _users.SignUp(model);
     }
 }

@@ -7,25 +7,44 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Viex.MyExpenses.Domain.Contexts.Session;
+using Viex.MyExpenses.Domain.Mappers;
 using Viex.MyExpenses.Domain.Models;
 using Viex.MyExpenses.Domain.Services.Users;
+using Viex.MyExpenses.Persistence.Repositores.Users;
 
 namespace Viex.MyExpenses.Domain.Services.Authentication
 {
     public interface IAuthenticationService
     {
+        Task<OAuthResponse> Impersonate(long userId);
         Task<OAuthResponse> SignIn(SignInModel model);
     }
 
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IConfiguration _config;
-        private readonly IUserService _users;
+        private readonly IModelMapper _modelMapper;
+        private readonly IUsersRepository _usersRepository;
+        private readonly IUserService _userService;
 
-        public AuthenticationService(IConfiguration config, IUserService users)
+        public AuthenticationService(IConfiguration config, IModelMapper modelMapper, IUsersRepository usersRepository, IUserService userService)
         {
             _config = config;
-            _users = users;
+            _modelMapper = modelMapper;
+            _usersRepository = usersRepository;
+            _userService = userService;
+        }
+
+        public async Task<OAuthResponse> Impersonate(long userId)
+        {
+            var user = await _usersRepository.GetById(userId);
+
+            if (user == null)
+                throw new UserNotFoundException(userId);
+
+            var userModel = await _modelMapper.AsModel(user);
+
+            return await CreateOAuthResponse(userModel);
         }
 
         public async Task<OAuthResponse> SignIn(SignInModel model)
@@ -33,7 +52,7 @@ namespace Viex.MyExpenses.Domain.Services.Authentication
             if (model.GrantType != "client_credentials")
                 throw new InvalidGrantTypeException();
 
-            var user = await _users.Authenticate(new AuthenticateModel
+            var user = await _userService.Authenticate(new AuthenticateModel
             {
                 Email = model.Email,
                 Password = model.Password,

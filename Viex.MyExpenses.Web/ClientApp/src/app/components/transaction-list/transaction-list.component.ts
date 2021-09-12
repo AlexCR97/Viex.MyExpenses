@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionEntry } from 'src/app/models/TransactionEntry';
+import { TransactionEntry } from 'src/app/models/TransactionEntry.model';
 
 const template = /*html*/`
 <div class="list-group list-group-flush">

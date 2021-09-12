@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "pBa44XP2V6jpMaGDnly5PuB1yM0Rm57OCyV4nP0RelE0xeiorrS0ZCG4yu3B4VqA1fvKyHSUG4uRXkayG2cmsQ==",
+  "dgSpecHash": "OfqWSxMH3Ypo+jSg6tM9yVU6jhmONZvpRK5pTXg/8MrRMxvfl68GdId5EVyN+TqtbOE15oOEOZe7/eKZf/yXWw==",
   "success": true,
   "projectFilePath": "D:\\Projects\\ASP Core\\Viex.MyExpenses\\Viex.MyExpenses.Core\\Viex.MyExpenses.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\carp_\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+    "C:\\Users\\carp_\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\carp_\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

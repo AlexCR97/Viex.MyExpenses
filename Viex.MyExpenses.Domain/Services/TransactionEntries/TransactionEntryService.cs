@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Viex.MyExpenses.Core.Extensions;
 using Viex.MyExpenses.Domain.Contexts.Session;
-using Viex.MyExpenses.Domain.Models;
+using Viex.MyExpenses.Domain.Mappers;
 using Viex.MyExpenses.Domain.Providers.Csv;
-using Viex.MyExpenses.Persistence.Entities;
-using Viex.MyExpenses.Persistence.Repositores;
 using Viex.MyExpenses.Persistence.Repositores.TransactionEntries;
+using Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors;
 
 namespace Viex.MyExpenses.Domain.Services.TransactionEntries
 {
@@ -18,7 +17,7 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
         Task<TransactionEntryModel> Create(TransactionEntryModel transaction);
         Task Delete(long id);
         Task DeleteAll();
-        Task<IEnumerable<TransactionEntryModel>> GetAll();
+        Task<IList<TransactionEntryModel>> GetAll();
         Task<WeeklyTransactions> GetWeeklyTransactions(WeeklyTransactionsSearchParams searchParams);
         Task ImportFromCsv(string csvFileBase64);
         Task<IList<TransactionEntryModel>> Search(TransactionEntrySearchParams searchParams);
@@ -27,50 +26,38 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
     public class TransactionEntryService : ITransactionEntryService
     {
         private readonly ICsvProvider _csv;
-        private readonly ISessionContext _session;
-        private readonly ITransactionEntriesRepository _transactions;
-        private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptors;
-
-        public TransactionEntryService(ICsvProvider csv, ISessionContext session, ITransactionEntriesRepository transactions, ITransactionTypeDescriptorsRepository transactionTypeDescriptors)
-        {
-            _csv = csv;
-            _session = session;
-            _transactions = transactions;
-            _transactionTypeDescriptors = transactionTypeDescriptors;
-        }
+        private readonly IModelMapper _modelMapper;
+        private readonly ISessionContext _sessionContext;
+        private readonly ITransactionEntriesRepository _transactionEntriesRepository;
+        private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptorsRepository;
 
         public async Task<TransactionEntryModel> Create(TransactionEntryModel transaction)
         {
-            transaction.Category = null;
-            transaction.DateCreated = DateTime.Now;
-            transaction.Type = null;
-            transaction.User = null;
-            transaction.UserId = _session.UserId;
+            var transactionEntity = await _modelMapper.AsEntity(transaction);
+            transactionEntity.DateCreated = DateTime.Now;
+            transactionEntity.User = null;
+            transactionEntity.UserId = _sessionContext.UserId;
             
-            var entity = transaction.AsEntity();
-            var transactionId = await _transactions.Create(entity);
-            var createdTransaction = await _transactions.GetById(transactionId);
+            var transactionId = await _transactionEntriesRepository.Create(transactionEntity);
+            var createdTransactionEntity = await _transactionEntriesRepository.GetById(transactionId);
 
-            return createdTransaction.AsModel();
+            return await _modelMapper.AsModel(createdTransactionEntity);
         }
 
-        public async Task Delete(long id)
-        {
-            await _transactions.Delete(id);
-        }
+        public async Task Delete(long id) =>
+            await _transactionEntriesRepository.Delete(id);
 
-        public async Task DeleteAll()
-        {
-            await _transactions.DeleteAll();
-        }
+        public async Task DeleteAll() =>
+            await _transactionEntriesRepository.DeleteAll();
 
-        public async Task<IEnumerable<TransactionEntryModel>> GetAll()
+        public async Task<IList<TransactionEntryModel>> GetAll()
         {
-            var transactions = await _transactions.GetWhere(_ => true);
+            var transactions = await _transactionEntriesRepository.GetWhere(user => user.UserId == _sessionContext.UserId);
 
             return transactions
-                .Select(x => x.AsModel())
-                .OrderByDescending(x => x.DateCreated);
+                .OrderByDescending(x => x.DateCreated)
+                .SelectAsync(x => _modelMapper.AsModel(x))
+                .AwaitList();
         }
 
         public async Task<WeeklyTransactions> GetWeeklyTransactions(WeeklyTransactionsSearchParams searchParams)
@@ -100,50 +87,50 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
                 Sunday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[0],
-                    TotalExpenses = sunday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = sunday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = sunday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = sunday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = sunday,
                 },
                 Monday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[1],
-                    TotalExpenses = monday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = monday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = monday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = monday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = monday,
                 },
                 Tuesday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[2],
-                    TotalExpenses = tuesday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = tuesday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = tuesday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = tuesday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = tuesday,
                 },
                 Wednesday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[3],
-                    TotalExpenses = wednesday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = wednesday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = wednesday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = wednesday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = wednesday,
                 },
                 Thursday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[4],
-                    TotalExpenses = thursday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = thursday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = thursday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = thursday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = thursday,
                 },
                 Friday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[5],
-                    TotalExpenses = friday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = friday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = friday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = friday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = friday,
                 },
                 Saturday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[6],
-                    TotalExpenses = saturday.Where(x => x.Type.Description == "Expense").Sum(x => x.Amount),
-                    TotalIncome = saturday.Where(x => x.Type.Description == "Income").Sum(x => x.Amount),
+                    TotalExpenses = saturday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = saturday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = saturday,
                 },
             };
@@ -155,27 +142,27 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
 
             foreach (var row in records)
             {
-                var type = await _transactionTypeDescriptors.GetFirst(x => x.Description == row.Type);
+                var type = await _transactionTypeDescriptorsRepository.GetFirst(x => x.Description == row.Type);
 
-                await _transactions.Create(new TransactionEntry
+                await _transactionEntriesRepository.Create(new TransactionEntry
                 {
                     Amount = decimal.Parse(row.Amount, NumberStyles.Currency),
                     DateCreated = DateTime.Parse(row.Date),
                     Description = row.Description,
-                    TypeId = type.TransactionTypeDescriptorId,
-                    UserId = _session.UserId,
+                    TransactionTypeDescriptorId = type.TransactionTypeDescriptorId,
+                    UserId = _sessionContext.UserId,
                 });
             }
         }
 
         public async Task<IList<TransactionEntryModel>> Search(TransactionEntrySearchParams searchParams)
         {
-            var transactions = await _transactions.Search(searchParams.AsQueryParams());
-            
+            var transactions = await _transactionEntriesRepository.Search(searchParams.AsQueryParams());
+
             return transactions
-                .Select(x => x.AsModel())
                 .OrderByDescending(x => x.DateCreated)
-                .ToList();
+                .SelectAsync(x => _modelMapper.AsModel(x))
+                .AwaitList();
         }
     }
 }

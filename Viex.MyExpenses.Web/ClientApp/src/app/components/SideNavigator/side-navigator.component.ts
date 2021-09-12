@@ -5,7 +5,7 @@ import { Offcanvas } from '../../plugins/bootstrap.plugin'
 import { DefaultSideNavigationItems, SideNavigationItem } from './SideNavigationItem';
 
 const template = /*html*/`
-<div class="offcanvas offcanvas-start" style="max-width: 80vw;" tabindex="-1" id="appDrawer" aria-labelledby="appDrawerLabel">
+<div class="offcanvas offcanvas-start" style="max-width: 70vw;" tabindex="-1" id="appDrawer" aria-labelledby="appDrawerLabel">
 
   <div class="offcanvas-header">
     <app-user-dropdown></app-user-dropdown>

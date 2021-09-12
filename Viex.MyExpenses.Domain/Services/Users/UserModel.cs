@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Viex.MyExpenses.Persistence.Entities;
+﻿using Viex.MyExpenses.Domain.Services;
+using Viex.MyExpenses.Persistence.Repositores.Users;
 
 namespace Viex.MyExpenses.Domain.Models
 {

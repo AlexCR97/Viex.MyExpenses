@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Viex.MyExpenses.Domain\Viex.MyExpenses.Domain.csproj" />
-    <ProjectReference Include="..\Viex.MyExpenses.Spa\Viex.MyExpenses.Spa.csproj" />
   </ItemGroup>
 
 

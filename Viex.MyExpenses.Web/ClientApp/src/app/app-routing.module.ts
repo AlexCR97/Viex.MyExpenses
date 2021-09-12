@@ -6,6 +6,7 @@ import { HomeComponent } from './views/main-container/home.component';
 import { SettingsComponent } from './views/main-container/settings.component';
 import { TransactionsComponent } from './views/main-container/transactions/transactions.component';
 import { TransactionDetailsComponent } from './views/main-container/transactions/transaction-details.component';
+import { UsersPageComponent } from './views/main-container/UsersPage/users-page.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
         path: 'settings',
         component: SettingsComponent,
       },
+      {
+        path: 'users',
+        component: UsersPageComponent,
+      }
     ],
   }
 ];

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Domain.Models;
-using Viex.MyExpenses.Persistence.Entities;
 using Viex.MyExpenses.Persistence.Repositores;
+using Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors;
+using Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors;
 
 namespace Viex.MyExpenses.Domain.Services
 {
@@ -13,32 +12,32 @@ namespace Viex.MyExpenses.Domain.Services
     {
         Task CreateCategories(IEnumerable<string> categories);
         Task CreateTransactionTypes(IEnumerable<string> transactionTypes);
-        Task DropCategories();
-        Task DropTransactionTypes();
-        Task<IList<CategoryDescriptorModel>> GetCategories();
-        Task<IList<TransactionTypeDescriptorModel>> GetTransactionTypes();
+        void DropCategories();
+        void DropTransactionTypes();
+        Task<IList<string>> GetCategories();
+        Task<IList<string>> GetTransactionTypes();
     }
 
     public class DescriptorService : IDescriptorService
     {
-        private readonly ICategoryDescriptorsRepository _categories;
-        private readonly ITransactionTypeDescriptorsRepository _transactionTypes;
+        private readonly ICategoryDescriptorsRepository _categoryDescriptorsRepository;
+        private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptorsRepository;
 
-        public DescriptorService(ICategoryDescriptorsRepository categories, ITransactionTypeDescriptorsRepository transactionTypes)
+        public DescriptorService(ICategoryDescriptorsRepository categoryDescriptorsRepository, ITransactionTypeDescriptorsRepository transactionTypeDescriptorsRepository)
         {
-            _categories = categories;
-            _transactionTypes = transactionTypes;
+            _categoryDescriptorsRepository = categoryDescriptorsRepository;
+            _transactionTypeDescriptorsRepository = transactionTypeDescriptorsRepository;
         }
 
         public async Task CreateCategories(IEnumerable<string> categories)
         {
             var categoryDescriptors = categories.Select(category => new CategoryDescriptor
             {
+                DateCreated = DateTime.Now,
                 Description = category,
             });
 
-            foreach (var descriptor in categoryDescriptors)
-                await _categories.Create(descriptor);
+            await _categoryDescriptorsRepository.CreateAll(categoryDescriptors);
         }
 
         public async Task CreateTransactionTypes(IEnumerable<string> transactionTypes)
@@ -48,28 +47,25 @@ namespace Viex.MyExpenses.Domain.Services
                 Description = type,
             });
 
-            foreach (var descriptor in transactionTypeDescriptors)
-                await _transactionTypes.Create(descriptor);
+            await _transactionTypeDescriptorsRepository.CreateAll(transactionTypeDescriptors);
         }
 
-        public async Task DropCategories() =>
-            await _categories.cle
+        public void DropCategories() =>
+            _categoryDescriptorsRepository.DropAll();
 
-        public Task DropTransactionTypes()
-        {
-            throw new NotImplementedException();
-        }
+        public void DropTransactionTypes() =>
+            _transactionTypeDescriptorsRepository.DropAll();
 
-        public async Task<IList<CategoryDescriptorModel>> GetCategories()
-        {
-            var categories = await _categories.GetWhere(_ => true);
-            return categories.Select(x => x.AsModel()).ToList();
-        }
+        public async Task<IList<string>> GetCategories() =>
+            await GetDescriptors(_categoryDescriptorsRepository);
 
-        public async Task<IList<TransactionTypeDescriptorModel>> GetTransactionTypes()
+        public async Task<IList<string>> GetTransactionTypes() =>
+            await GetDescriptors(_transactionTypeDescriptorsRepository);
+
+        private async Task<IList<string>> GetDescriptors<T>(IDescriptorRepository<T> repository) where T : BaseDescriptorEntity
         {
-            var types = await _transactionTypes.GetWhere(_ => true);
-            return types.Select(type => type.AsModel()).ToList();
+            var descriptors = await repository.Get();
+            return descriptors.Select(x => x.Description).ToList();
         }
     }
 }

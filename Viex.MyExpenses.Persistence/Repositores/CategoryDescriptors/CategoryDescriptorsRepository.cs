@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors
 {
-    public interface ICategoryDescriptorsRepository : IRepository<CategoryDescriptor>
+    public interface ICategoryDescriptorsRepository : IDescriptorRepository<CategoryDescriptor>
     {
 
     }
@@ -21,41 +21,23 @@ namespace Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors
             _context = context;
         }
 
-        public async Task<long> Create(CategoryDescriptor entity)
+        public async Task<IList<long>> CreateAll(IEnumerable<CategoryDescriptor> entities)
         {
-            entity.DateCreated = DateTime.Now;
-            await _context.CategoryDescriptors.AddAsync(entity);
+            await _context.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
-            return entity.CategoryDescriptorId;
+            return entities.Select(x => x.CategoryDescriptorId).ToList();
         }
 
-        public async Task Delete(long id)
-        {
-            var snapshot = await _context.CategoryDescriptors.FirstAsync(s => s.CategoryDescriptorId == id);
-            _context.CategoryDescriptors.Remove(snapshot);
-            await _context.SaveChangesAsync();
-        }
+        public void DropAll() =>
+            _context.CategoryDescriptors.Clear();
 
-        public async Task<CategoryDescriptor> GetById(long id)
-        {
-            return await _context.CategoryDescriptors.FirstOrDefaultAsync(s => s.CategoryDescriptorId == id);
-        }
+        public async Task<IList<CategoryDescriptor>> Get() =>
+            await _context.CategoryDescriptors.ToListAsync();
 
-        public async Task<CategoryDescriptor> GetFirst(Expression<Func<CategoryDescriptor, bool>> predicate)
-        {
-            return await _context.CategoryDescriptors.FirstOrDefaultAsync(predicate);
-        }
+        public async Task<CategoryDescriptor> GetByDescription(string description) =>
+            await _context.CategoryDescriptors.FirstOrDefaultAsync(x => x.Description == description);
 
-        public async Task<IList<CategoryDescriptor>> GetWhere(Expression<Func<CategoryDescriptor, bool>> predicate)
-        {
-            return await _context.CategoryDescriptors
-                .Where(predicate)
-                .ToListAsync();
-        }
-
-        public Task Update(CategoryDescriptor entity)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<CategoryDescriptor> GetFirst(Expression<Func<CategoryDescriptor, bool>> predicate) =>
+            await _context.CategoryDescriptors.FirstOrDefaultAsync(predicate);
     }
 }

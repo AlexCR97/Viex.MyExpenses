@@ -1,0 +1,12 @@
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\bin\Debug\net5.0\Viex.MyExpenses.Core.deps.json
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\bin\Debug\net5.0\Viex.MyExpenses.Core.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\bin\Debug\net5.0\ref\Viex.MyExpenses.Core.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\bin\Debug\net5.0\Viex.MyExpenses.Core.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.AssemblyInfoInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.AssemblyInfo.cs
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.csproj.CoreCompileInputs.cache
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\ref\Viex.MyExpenses.Core.dll
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.pdb
+D:\Projects\ASP Core\Viex.MyExpenses\Viex.MyExpenses.Core\obj\Debug\net5.0\Viex.MyExpenses.Core.csproj.AssemblyReference.cache

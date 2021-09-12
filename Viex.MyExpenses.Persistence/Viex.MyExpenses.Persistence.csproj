@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +16,10 @@
   <ItemGroup>
     <Folder Include="Backups\" />
     <Folder Include="Scripts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Viex.MyExpenses.Core\Viex.MyExpenses.Core.csproj" />
   </ItemGroup>
 
 </Project>

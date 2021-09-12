@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +28,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ToastComponent } from './components/Toast/toast.component';
 import { DatePickerComponent } from './components/date-picker.component';
+import { HttpInterceptorService } from './services/http-interceptor.service';
+import { UsersPageComponent } from './views/main-container/UsersPage/users-page.component';
+import { FlexComponent } from './components/flex.component';
+import { UserListComponent } from './components/UserList/user-list.component';
+import { UserItemComponent } from './components/UserList/user-item.component';
+import { ActionDrawerComponent } from './components/ActionDrawer/action-drawer.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +58,12 @@ import { DatePickerComponent } from './components/date-picker.component';
     TextFieldComponent,
     SelectComponent,
     ToastComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    UsersPageComponent,
+    FlexComponent,
+    UserListComponent,
+    UserItemComponent,
+    ActionDrawerComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +72,13 @@ import { DatePickerComponent } from './components/date-picker.component';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

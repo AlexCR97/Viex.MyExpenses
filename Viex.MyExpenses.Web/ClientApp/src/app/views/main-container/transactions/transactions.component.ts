@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
-import { WeeklyTransactionsEntry } from 'src/app/models/WeeklyTransactionsEntry';
+import { TransactionType } from 'src/app/models/Descriptors';
+import { WeeklyTransactionsEntry } from 'src/app/models/WeeklyTransactionsEntry.model';
 import arrays from 'src/app/utils/arrays';
 import dates from 'src/app/utils/dates';
 import { notNullNorEmpty } from 'src/app/utils/validators';
@@ -82,13 +82,12 @@ export class TransactionsComponent implements OnInit {
         totalIncome: 0,
         transactions: arrays.fromRange(0, 3).map(index => ({
           amount: 100,
-          category: 'Category',
-          categoryId: undefined,
+          categoryDescriptor: 'Category',
           dateCreated: new Date(),
           dateUpdated: new Date(),
           description: 'This is a transaction',
           transactionEntryId: undefined,
-          type: index % 2 == 0 ? TransactionType.expense : TransactionType.income,
+          transactionTypeDescriptor: index % 2 == 0 ? TransactionType.expense : TransactionType.income,
           typeId: undefined,
           user: {
             dateCreated: new Date(),

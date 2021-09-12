@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors
 {
-    public class TransactionTypeDescriptor : BaseDescriptor
+    public class TransactionTypeDescriptor : BaseDescriptorEntity
     {
         public long TransactionTypeDescriptorId { get; set; }
     }

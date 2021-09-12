@@ -1,6 +1,6 @@
 ﻿namespace Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors
 {
-    public class CategoryDescriptor : BaseDescriptor
+    public class CategoryDescriptor : BaseDescriptorEntity
     {
         public long CategoryDescriptorId { get; set; }
     }

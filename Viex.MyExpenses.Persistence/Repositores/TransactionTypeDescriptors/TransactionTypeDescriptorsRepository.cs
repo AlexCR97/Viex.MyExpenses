@@ -3,13 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Persistence.Entities;
 
 namespace Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors
 {
-    public interface ITransactionTypeDescriptorsRepository : IRepository<TransactionTypeDescriptor>
+    public interface ITransactionTypeDescriptorsRepository : IDescriptorRepository<TransactionTypeDescriptor>
     {
 
     }
@@ -23,41 +21,23 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors
             _context = context;
         }
 
-        public async Task<long> Create(TransactionTypeDescriptor entity)
+        public async Task<IList<long>> CreateAll(IEnumerable<TransactionTypeDescriptor> entities)
         {
-            entity.DateCreated = DateTime.Now;
-            await _context.TransactionTypeDescriptors.AddAsync(entity);
+            await _context.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
-            return entity.TransactionTypeDescriptorId;
+            return entities.Select(x => x.TransactionTypeDescriptorId).ToList();
         }
 
-        public async Task Delete(long id)
-        {
-            var snapshot = await _context.TransactionTypeDescriptors.FirstAsync(s => s.TransactionTypeDescriptorId == id);
-            _context.TransactionTypeDescriptors.Remove(snapshot);
-            await _context.SaveChangesAsync();
-        }
+        public void DropAll() =>
+            _context.TransactionTypeDescriptors.Clear();
 
-        public async Task<TransactionTypeDescriptor> GetById(long id)
-        {
-            return await _context.TransactionTypeDescriptors.FirstOrDefaultAsync(s => s.TransactionTypeDescriptorId == id);
-        }
+        public async Task<IList<TransactionTypeDescriptor>> Get() =>
+            await _context.TransactionTypeDescriptors.ToListAsync();
 
-        public async Task<TransactionTypeDescriptor> GetFirst(Expression<Func<TransactionTypeDescriptor, bool>> predicate)
-        {
-            return await _context.TransactionTypeDescriptors.FirstOrDefaultAsync(predicate);
-        }
+        public async Task<TransactionTypeDescriptor> GetByDescription(string description) =>
+            await _context.TransactionTypeDescriptors.FirstOrDefaultAsync(x => x.Description == description);
 
-        public async Task<IList<TransactionTypeDescriptor>> GetWhere(Expression<Func<TransactionTypeDescriptor, bool>> predicate)
-        {
-            return await _context.TransactionTypeDescriptors
-                .Where(predicate)
-                .ToListAsync();
-        }
-
-        public Task Update(TransactionTypeDescriptor entity)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<TransactionTypeDescriptor> GetFirst(Expression<Func<TransactionTypeDescriptor, bool>> predicate) =>
+            await _context.TransactionTypeDescriptors.FirstOrDefaultAsync(predicate);
     }
 }

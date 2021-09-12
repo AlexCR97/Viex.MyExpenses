@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Domain.Models;
 using Viex.MyExpenses.Domain.Services;
+using Viex.MyExpenses.Domain.Services.Descriptors;
 
 namespace Viex.MyExpenses.Api.Controllers
 {
@@ -13,35 +10,27 @@ namespace Viex.MyExpenses.Api.Controllers
     [ApiController]
     public class DescriptorsController : ControllerBase
     {
-        private readonly IDescriptorService _service;
+        private readonly IDescriptorService _descriptorService;
 
-        public DescriptorsController(IDescriptorService service)
+        public DescriptorsController(IDescriptorService descriptorService)
         {
-            _service = service;
+            _descriptorService = descriptorService;
         }
 
-        [HttpPost("categories")]
-        public async Task CreateCategories([FromBody] IEnumerable<string> categories)
-        {
-            await _service.CreateCategories(categories);
-        }
+        [HttpPost(DescriptorTypes.Categories)]
+        public async Task CreateCategories([FromBody] IEnumerable<string> categories) =>
+            await _descriptorService.CreateCategories(categories);
 
-        [HttpPost("transactionTypes")]
-        public async Task CreateTransactionTypes([FromBody] IEnumerable<string> types)
-        {
-            await _service.CreateTransactionTypes(types);
-        }
+        [HttpPost(DescriptorTypes.TransactionTypes)]
+        public async Task CreateTransactionTypes([FromBody] IEnumerable<string> types) =>
+            await _descriptorService.CreateTransactionTypes(types);
 
-        [HttpGet("categories")]
-        public async Task<IEnumerable<CategoryDescriptorModel>> GetCategories()
-        {
-            return await _service.GetCategories();
-        }
+        [HttpGet(DescriptorTypes.Categories)]
+        public async Task<IList<string>> GetCategories() =>
+            await _descriptorService.GetCategories();
 
-        [HttpGet("transactionTypes")]
-        public async Task<IEnumerable<TransactionTypeDescriptorModel>> GetTransactionTypes()
-        {
-            return await _service.GetTransactionTypes();
-        }
+        [HttpGet(DescriptorTypes.TransactionTypes)]
+        public async Task<IList<string>> GetTransactionTypes() =>
+            await _descriptorService.GetTransactionTypes();
     }
 }

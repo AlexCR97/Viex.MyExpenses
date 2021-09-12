@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Viex.MyExpenses.Domain.Models;
-using Viex.MyExpenses.Persistence.Entities;
-
-namespace Viex.MyExpenses.Domain.Services.TransactionEntries
+﻿namespace Viex.MyExpenses.Domain.Services.TransactionEntries
 {
     public class WeeklyTransactions
     {

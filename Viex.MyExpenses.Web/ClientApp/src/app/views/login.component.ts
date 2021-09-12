@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors';
 import { LoadingModalService } from '../components/modals/LoadingModal/loading-modal.service';
-import { UserCredentials, UserCredentialsValidator } from '../models/UserCredentials';
+import { UserCredentials, UserCredentialsValidator } from '../models/UserCredentials.model';
+import { StaticRoutes } from '../Routes';
 import { ApiService } from '../services/api/api.service';
 import timers from '../utils/timers';
 
@@ -32,6 +33,12 @@ const template = /*html*/`
     </div>
   </div>
 </div>
+
+<div class="fixed-bottom">
+  <app-flex paddingX="3" paddingY="2">
+    <span class="text-info" (click)="onLoginSysAdminClicked()">Login as SysAdmin</span>
+  </app-flex>
+</div>
 `
 
 @Component({
@@ -60,6 +67,10 @@ export class LoginComponent implements OnInit {
 
   onLoginClicked() {
     this.attemptAuthentication()
+  }
+
+  onLoginSysAdminClicked() {
+    this.router.navigateByUrl(StaticRoutes.usersPage)
   }
 
   private async authenticate(email: string, password: string) {

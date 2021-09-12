@@ -15,7 +15,6 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Viex.MyExpenses.Domain;
-using Viex.MyExpenses.Spa;
 
 namespace Viex.MyExpenses.Api
 {
@@ -35,7 +34,6 @@ namespace Viex.MyExpenses.Api
             services
                 .AddDomainLayer(Configuration)
                 .AddHttpContextAccessor()
-                //.AddSpaLayer(SpaLayerConfigurations)
                 .AddCustomAuthentication(Configuration)
                 .AddControllers()
                 ;
@@ -82,41 +80,6 @@ namespace Viex.MyExpenses.Api
                 endpoints.MapControllers();
             });
         }
-
-        private string SolutionPath
-        {
-            get {
-                var combined = Path.Combine(Environment.ContentRootPath, @"..\");
-                return Path.GetFullPath(combined);
-            }
-        }
-
-        private string SpaProjectPath
-        {
-            get {
-                return $"{SolutionPath}/Viex.MyExpenses.Spa";
-            }
-        }
-
-        private SpaLayerConfigurations SpaLayerConfigurations
-        {
-            get {
-                return new SpaLayerConfigurations
-                {
-                    ServePath = $"{SpaProjectPath}/ClientApp/public",
-                };
-            }
-        }
-
-        private SpaLayerBuilderOptions SpaLayerBuilderOptions
-        {
-            get {
-                return new SpaLayerBuilderOptions
-                {
-                    SourcePath = $"{SpaProjectPath}/ClientApp",
-                };
-            }
-        }
     }
 
     public static class StartupExtensions
@@ -141,7 +104,6 @@ namespace Viex.MyExpenses.Api
 
             services.AddMvc(options =>
             {
-                // By Convention we are securring every endpoint.
                 var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();

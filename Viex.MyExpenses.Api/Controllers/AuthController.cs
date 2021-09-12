@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Viex.MyExpenses.Domain.Models;
 using Viex.MyExpenses.Domain.Services.Authentication;
-using Viex.MyExpenses.Domain.Services.Users;
 
 namespace Viex.MyExpenses.Api.Controllers
 {
@@ -23,9 +17,16 @@ namespace Viex.MyExpenses.Api.Controllers
         }
 
         [HttpPost("authenticate"), AllowAnonymous]
-        public async Task<OAuthResponse> Authenticate([FromBody] SignInModel model)
-        {
-            return await _service.SignIn(model);
-        }
+        public async Task<OAuthResponse> Authenticate([FromBody] SignInModel model) =>
+            await _service.SignIn(model);
+
+        [HttpPost("impersonate"), AllowAnonymous]
+        public async Task<OAuthResponse> Authenticate([FromBody] ImpersonateRequest request) =>
+            await _service.Impersonate(request.UserId);
+    }
+
+    public class ImpersonateRequest
+    {
+        public long UserId { get; set; }
     }
 }

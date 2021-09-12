@@ -1,3 +1,5 @@
+import { StaticRoutes } from "src/app/Routes";
+
 export interface SideNavigationItem {
     icon: string
     label: string
@@ -23,9 +25,16 @@ export const SettingsSideNavigationItem: SideNavigationItem = {
     path: '/app/settings',
 };
 
+export const UsersSideNavigationItem: SideNavigationItem = {
+    icon: 'people',
+    label: 'Users',
+    path: StaticRoutes.usersPage,
+}
+
 export const DefaultSideNavigationItems = [
     HomeSideNavigationItem,
     TransactionsSideNavigationItem,
     SettingsSideNavigationItem,
+    UsersSideNavigationItem,
 ]
 

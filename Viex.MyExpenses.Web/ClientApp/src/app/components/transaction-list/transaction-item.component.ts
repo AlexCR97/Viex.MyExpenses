@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionEntry } from 'src/app/models/TransactionEntry';
-import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
+import { TransactionType } from 'src/app/models/Descriptors';
+import { TransactionEntry } from 'src/app/models/TransactionEntry.model';
 import timers from 'src/app/utils/timers';
 import { notNull } from 'src/app/utils/validators';
 import { ConfirmModalService } from '../modals/ConfirmModal/confirm-modal.service';
@@ -16,7 +16,7 @@ const template = /*html*/`
     
     <div class="me-auto">
       <p class="m-0">{{transaction.description}}</p>
-      <p *ngIf="hasCategory" class="m-0" style="color: gray; font-size: 14px">{{transaction.category}}</p>
+      <p *ngIf="hasCategory" class="m-0" style="color: gray; font-size: 14px">{{categoryDescriptor}}</p>
     </div>
 
   </div>
@@ -29,7 +29,7 @@ const template = /*html*/`
       <span class="text-end me-3" style="min-width: 70px;" [ngClass]="amountClass">
         {{amount}}
       </span>
-      {{transaction.description}}
+      {{transactionTypeDescriptor}}
     </p>
   </div>
 
@@ -85,16 +85,24 @@ export class TransactionItemComponent implements OnInit {
     };
   }
 
+  get categoryDescriptor() {
+    return this.transaction.categoryDescriptor
+  }
+
+  get transactionTypeDescriptor() {
+    return this.transaction.transactionTypeDescriptor
+  }
+
   get hasCategory() {
-    return notNull(this.transaction.category)
+    return notNull(this.transaction.categoryDescriptor)
   }
 
   get isExpense() {
-    return this.transaction.type == TransactionType.expense
+    return this.transaction.transactionTypeDescriptor == TransactionType.expense
   }
 
   get isIncome() {
-    return this.transaction.type == TransactionType.income
+    return this.transaction.transactionTypeDescriptor == TransactionType.income
   }
 
   onClicked() {

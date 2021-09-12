@@ -2,15 +2,14 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors';
-import { ConfirmModalService } from 'src/app/components/modals/ConfirmModal/confirm-modal.service';
 import { LoadingModalService } from 'src/app/components/modals/LoadingModal/loading-modal.service';
 import { ToastService } from 'src/app/components/Toast/toast.service';
-import { TransactionEntry, TransactionEntryValidator } from 'src/app/models/TransactionEntry';
-import { TransactionType } from 'src/app/models/TransactionTypeDescriptor';
+import { TransactionType } from 'src/app/models/Descriptors';
+import { TransactionEntry, TransactionEntryValidator } from 'src/app/models/TransactionEntry.model';
 import arrays from 'src/app/utils/arrays';
 import objects from 'src/app/utils/objects';
 import timers from 'src/app/utils/timers';
-import { isNull, isNullOrZero } from 'src/app/utils/validators';
+import { isNullOrZero } from 'src/app/utils/validators';
 
 const template = /*html*/`
 <div style="height: 50px">
@@ -25,13 +24,13 @@ const template = /*html*/`
   <app-text-field label="Description" type="text" [errorMessage]="transactionValidations.description" [(value)]="transaction.description"></app-text-field>
   <div class="mb-4"></div>
   
-  <app-select label="Type" [errorMessage]="transactionValidations.type" [items]="types" [(value)]="transaction.type"></app-select>
+  <app-select label="Type" [errorMessage]="transactionValidations.transactionTypeDescriptor" [items]="types" [(value)]="transaction.transactionTypeDescriptor"></app-select>
   <div class="mb-4"></div>
 
   <app-date-picker [(value)]="transaction.dateCreated"></app-date-picker>
   <div class="mb-4"></div>
   
-  <app-select label="Category" [errorMessage]="transactionValidations.category" [items]="categories" [(value)]="transaction.category"></app-select>
+  <app-select label="Category" [errorMessage]="transactionValidations.categoryDescriptor" [items]="categories" [(value)]="transaction.categoryDescriptor"></app-select>
   <div class="mb-4"></div>
 
 </div>
