@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Viex.MyExpenses.Core.Extensions;
 using Viex.MyExpenses.Domain.Mappers;
 using Viex.MyExpenses.Domain.Models;
-using Viex.MyExpenses.Persistence.Repositores.Users;
+using Viex.MyExpenses.Persistence.Repositories.Users;
 
 namespace Viex.MyExpenses.Domain.Services.Users
 {
@@ -39,7 +39,7 @@ namespace Viex.MyExpenses.Domain.Services.Users
             if (!passwordMatch)
                 throw new AuthenticationFailedException();
 
-            return foundUser.AsModel();
+            return await _modelMapper.AsModel(foundUser);
         }
 
         public async Task<IList<UserModel>> GetAll()
@@ -63,7 +63,7 @@ namespace Viex.MyExpenses.Domain.Services.Users
 
             var createdUser = await _usersRepository.GetById(createdUserId);
 
-            return createdUser.AsModel();
+            return await _modelMapper.AsModel(createdUser);
         }
 
         private async void ThrowIfEmailTaken(string email)

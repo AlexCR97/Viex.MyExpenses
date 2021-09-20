@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors
+namespace Viex.MyExpenses.Persistence.Repositories.TransactionTypeDescriptors
 {
     public interface ITransactionTypeDescriptorsRepository : IDescriptorRepository<TransactionTypeDescriptor>
     {
@@ -21,7 +21,7 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors
             _context = context;
         }
 
-        public async Task<IList<long>> CreateAll(IEnumerable<TransactionTypeDescriptor> entities)
+        public async Task<IList<int>> CreateAll(IEnumerable<TransactionTypeDescriptor> entities)
         {
             await _context.AddRangeAsync(entities);
             await _context.SaveChangesAsync();

@@ -10,14 +10,14 @@ using Viex.MyExpenses.Domain.Contexts.Session;
 using Viex.MyExpenses.Domain.Mappers;
 using Viex.MyExpenses.Domain.Models;
 using Viex.MyExpenses.Domain.Services.Users;
-using Viex.MyExpenses.Persistence.Repositores.Users;
+using Viex.MyExpenses.Persistence.Repositories.Users;
 
 namespace Viex.MyExpenses.Domain.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Task<OAuthResponse> Impersonate(long userId);
-        Task<OAuthResponse> SignIn(SignInModel model);
+        Task<OAuthResponse> Impersonate(int userId);
+        Task<OAuthResponse> Authenticate(SignInModel model);
     }
 
     public class AuthenticationService : IAuthenticationService
@@ -35,7 +35,7 @@ namespace Viex.MyExpenses.Domain.Services.Authentication
             _userService = userService;
         }
 
-        public async Task<OAuthResponse> Impersonate(long userId)
+        public async Task<OAuthResponse> Impersonate(int userId)
         {
             var user = await _usersRepository.GetById(userId);
 
@@ -47,7 +47,7 @@ namespace Viex.MyExpenses.Domain.Services.Authentication
             return await CreateOAuthResponse(userModel);
         }
 
-        public async Task<OAuthResponse> SignIn(SignInModel model)
+        public async Task<OAuthResponse> Authenticate(SignInModel model)
         {
             if (model.GrantType != "client_credentials")
                 throw new InvalidGrantTypeException();

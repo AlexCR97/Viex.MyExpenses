@@ -34,6 +34,9 @@ import { FlexComponent } from './components/flex.component';
 import { UserListComponent } from './components/UserList/user-list.component';
 import { UserItemComponent } from './components/UserList/user-item.component';
 import { ActionDrawerComponent } from './components/ActionDrawer/action-drawer.component';
+import { DescriptorsPageComponent } from './views/main-container/DescriptorsPage/descriptors-page.component';
+import { ListItemComponent } from './components/ListItem/list-item.component';
+import { CollapseContainerComponent } from './components/CollapseContainer/collapse-container.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,10 @@ import { ActionDrawerComponent } from './components/ActionDrawer/action-drawer.c
     FlexComponent,
     UserListComponent,
     UserItemComponent,
-    ActionDrawerComponent
+    ActionDrawerComponent,
+    DescriptorsPageComponent,
+    ListItemComponent,
+    CollapseContainerComponent
   ],
   imports: [
     BrowserModule,

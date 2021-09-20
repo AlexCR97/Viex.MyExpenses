@@ -19,11 +19,15 @@ namespace Viex.MyExpenses.Api.Controllers
 
         [HttpPost(DescriptorTypes.Categories)]
         public async Task CreateCategories([FromBody] IEnumerable<string> categories) =>
-            await _descriptorService.CreateCategories(categories);
+            await _descriptorService.CreateTransactionCategories(categories);
 
         [HttpPost(DescriptorTypes.TransactionTypes)]
         public async Task CreateTransactionTypes([FromBody] IEnumerable<string> types) =>
             await _descriptorService.CreateTransactionTypes(types);
+
+        [HttpPost(DescriptorTypes.Roles)]
+        public async Task CreateRoles([FromBody] IEnumerable<string> roles) =>
+            await _descriptorService.CreateRoles(roles);
 
         [HttpGet(DescriptorTypes.Categories)]
         public async Task<IList<string>> GetCategories() =>

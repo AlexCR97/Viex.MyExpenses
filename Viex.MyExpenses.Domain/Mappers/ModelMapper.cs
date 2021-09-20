@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Viex.MyExpenses.Domain.Models;
+using Viex.MyExpenses.Domain.Services.Descriptors;
+using Viex.MyExpenses.Domain.Services.TransactionCategoryDescriptors;
 using Viex.MyExpenses.Domain.Services.TransactionEntries;
+using Viex.MyExpenses.Domain.Services.TransactionSubCategoryDescriptors;
 using Viex.MyExpenses.Domain.Services.TransactionTypeDescriptors;
-using Viex.MyExpenses.Persistence.Repositores.CategoryDescriptors;
-using Viex.MyExpenses.Persistence.Repositores.TransactionEntries;
-using Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors;
-using Viex.MyExpenses.Persistence.Repositores.Users;
+using Viex.MyExpenses.Persistence.Repositories.TransactionCategoryDescriptors;
+using Viex.MyExpenses.Persistence.Repositories.TransactionEntries;
+using Viex.MyExpenses.Persistence.Repositories.TransactionSubCategoryDescriptors;
+using Viex.MyExpenses.Persistence.Repositories.TransactionTypeDescriptors;
+using Viex.MyExpenses.Persistence.Repositories.Users;
 
 namespace Viex.MyExpenses.Domain.Mappers
 {
@@ -18,13 +22,17 @@ namespace Viex.MyExpenses.Domain.Mappers
         Task<TransactionEntry> AsEntity(TransactionEntryModel model);
         Task<TransactionEntryModel> AsModel(TransactionEntry entity);
 
+        Task<TransactionSubCategoryDescriptor> AsEntity(TransactionSubCategoryDescriptorModel model);
+        Task<TransactionSubCategoryDescriptorModel> AsModel(TransactionSubCategoryDescriptor entity);
+
         Task<User> AsEntity(UserModel model);
         Task<UserModel> AsModel(User entity);
     }
 
     public class ModelMapper : IModelMapper
     {
-        private readonly ICategoryDescriptorsRepository _categoryDescriptorsRepository;
+        private readonly ITransactionCategoryDescriptorRepository _transactionCategoryDescriptorsRepository;
+        private readonly ITransactionSubCategoryDescriptorRepository _transactionSubCategoryDescriptorRepository;
         private readonly ITransactionEntriesRepository _transactionEntriesRepository;
         private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptorsRepository;
         private readonly IUsersRepository _usersRepository;
@@ -39,13 +47,15 @@ namespace Viex.MyExpenses.Domain.Mappers
                 DateCreated = model.DateCreated,
                 DateUpdated = model.DateUpdated,
                 Description = model.Description,
+                TransactionCategoryDescriptorOther = model.TransactionCategoryDescriptorOther,
                 TransactionEntryId = model.TransactionEntryId,
+                TransactionSubCategoryDescriptorOther = model.TransactionSubCategoryDescriptorOther,
                 User = await AsEntity(model.User),
                 UserId = model.UserId,
             };
 
-            entity.CategoryDescriptorId = await GetCategoryDescriptorId(model.CategoryDescriptor);
-            entity.TransactionTypeDescriptorId = await GetTransactionTypeDescriptorId(model.TransactionTypeDescriptor);
+            entity.TransactionCategoryDescriptorId = await GetTransactionCategoryDescriptorId(model.TransactionCategoryDescriptor);
+            entity.TransactionSubCategoryDescriptorId = await GetTransactionSubCategoryDescriptorId(model.TransactionSubCategoryDescriptor);
 
             return entity;
         }
@@ -53,14 +63,52 @@ namespace Viex.MyExpenses.Domain.Mappers
         public async Task<TransactionEntryModel> AsModel(TransactionEntry entity) => new()
         {
             Amount = entity.Amount,
-            CategoryDescriptor = entity.CategoryDescriptor?.Description,
             DateCreated = entity.DateCreated,
             DateUpdated = entity.DateUpdated,
             Description = entity.Description,
+            TransactionCategoryDescriptor = entity.TransactionCategoryDescriptor.Description,
+            TransactionCategoryDescriptorOther = entity.TransactionCategoryDescriptorOther,
+            TransactionSubCategoryDescriptorOther = entity.TransactionSubCategoryDescriptorOther,
             TransactionEntryId = entity.TransactionEntryId,
-            TransactionTypeDescriptor = entity.TransactionTypeDescriptor?.Description,
+            TransactionSubCategoryDescriptor = entity.TransactionSubCategoryDescriptor?.Description,
             User = await AsModel(entity.User),
             UserId = entity.UserId,
+        };
+
+        #endregion
+
+        #region TransactionSubCategoryDescriptor
+
+        public async Task<TransactionSubCategoryDescriptor> AsEntity(TransactionSubCategoryDescriptorModel model)
+        {
+            var categorySnapshot = await _transactionCategoryDescriptorsRepository.GetByDescription(model.TransactionCategoryDescriptor);
+
+            if (categorySnapshot == null)
+                throw new TransactionCategoryDescriptorNotFoundException(model.TransactionCategoryDescriptor);
+
+            var subCategoryDescriptorEntity = new TransactionSubCategoryDescriptor
+            {
+                Description = model.Description,
+                TransactionCategoryDescriptor = categorySnapshot,
+                TransactionCategoryDescriptorId = categorySnapshot.TransactionCategoryDescriptorId,
+            };
+
+            var subCategorySnapshot = await _transactionSubCategoryDescriptorRepository.GetByDescription(model.Description);
+
+            if (subCategorySnapshot != null)
+            {
+                subCategoryDescriptorEntity.DateCreated = subCategorySnapshot.DateCreated;
+                subCategoryDescriptorEntity.DateUpdated = subCategorySnapshot.DateUpdated;
+                subCategoryDescriptorEntity.TransactionSubCategoryDescriptorId = subCategorySnapshot.TransactionSubCategoryDescriptorId;
+            }
+
+            return subCategoryDescriptorEntity;
+        }
+
+        public async Task<TransactionSubCategoryDescriptorModel> AsModel(TransactionSubCategoryDescriptor entity) => new()
+        {
+            Description = entity.Description,
+            TransactionCategoryDescriptor = entity.TransactionCategoryDescriptor.Description,
         };
 
         #endregion
@@ -103,20 +151,20 @@ namespace Viex.MyExpenses.Domain.Mappers
 
         #region Helpers
 
-        private async Task<long?> GetCategoryDescriptorId(string description)
+        private async Task<int> GetTransactionCategoryDescriptorId(string description)
         {
-            var descriptor = await _categoryDescriptorsRepository.GetByDescription(description);
-            return descriptor?.CategoryDescriptorId;
-        }
-
-        private async Task<long> GetTransactionTypeDescriptorId(string description)
-        {
-            var descriptor = await _transactionTypeDescriptorsRepository.GetByDescription(description);
+            var descriptor = await _transactionCategoryDescriptorsRepository.GetByDescription(description);
 
             if (descriptor == null)
-                throw new TransactionTypeDescriptorNotFoundException();
+                throw new TransactionTypeDescriptorNotFoundException(); // TODO Throw proper exception
 
-            return descriptor.TransactionTypeDescriptorId;
+            return descriptor.TransactionCategoryDescriptorId;
+        }
+
+        private async Task<int?> GetTransactionSubCategoryDescriptorId(string description)
+        {
+            var descriptor = await _transactionSubCategoryDescriptorRepository.GetByDescription(description);
+            return descriptor?.TransactionSubCategoryDescriptorId;
         }
 
         #endregion

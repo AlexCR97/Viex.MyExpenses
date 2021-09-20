@@ -7,8 +7,8 @@ using Viex.MyExpenses.Core.Extensions;
 using Viex.MyExpenses.Domain.Contexts.Session;
 using Viex.MyExpenses.Domain.Mappers;
 using Viex.MyExpenses.Domain.Providers.Csv;
-using Viex.MyExpenses.Persistence.Repositores.TransactionEntries;
-using Viex.MyExpenses.Persistence.Repositores.TransactionTypeDescriptors;
+using Viex.MyExpenses.Persistence.Repositories.TransactionEntries;
+using Viex.MyExpenses.Persistence.Repositories.TransactionTypeDescriptors;
 
 namespace Viex.MyExpenses.Domain.Services.TransactionEntries
 {
@@ -87,50 +87,50 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
                 Sunday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[0],
-                    TotalExpenses = sunday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = sunday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = sunday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = sunday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = sunday,
                 },
                 Monday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[1],
-                    TotalExpenses = monday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = monday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = monday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = monday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = monday,
                 },
                 Tuesday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[2],
-                    TotalExpenses = tuesday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = tuesday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = tuesday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = tuesday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = tuesday,
                 },
                 Wednesday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[3],
-                    TotalExpenses = wednesday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = wednesday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = wednesday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = wednesday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = wednesday,
                 },
                 Thursday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[4],
-                    TotalExpenses = thursday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = thursday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = thursday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = thursday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = thursday,
                 },
                 Friday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[5],
-                    TotalExpenses = friday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = friday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = friday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = friday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = friday,
                 },
                 Saturday = new WeeklyTransactionsEntry
                 {
                     Date = datesOfWeek[6],
-                    TotalExpenses = saturday.Where(x => x.TransactionTypeDescriptor == "Expense").Sum(x => x.Amount),
-                    TotalIncome = saturday.Where(x => x.TransactionTypeDescriptor == "Income").Sum(x => x.Amount),
+                    TotalExpenses = saturday.Where(x => x.TransactionSubCategoryDescriptor == "Expense").Sum(x => x.Amount),
+                    TotalIncome = saturday.Where(x => x.TransactionSubCategoryDescriptor == "Income").Sum(x => x.Amount),
                     Transactions = saturday,
                 },
             };
@@ -149,8 +149,8 @@ namespace Viex.MyExpenses.Domain.Services.TransactionEntries
                     Amount = decimal.Parse(row.Amount, NumberStyles.Currency),
                     DateCreated = DateTime.Parse(row.Date),
                     Description = row.Description,
-                    TransactionTypeDescriptorId = type.TransactionTypeDescriptorId,
                     UserId = _sessionContext.UserId,
+                    // TODO Add missing props
                 });
             }
         }

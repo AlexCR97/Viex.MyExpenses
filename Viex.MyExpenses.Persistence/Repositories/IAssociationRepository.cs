@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Viex.MyExpenses.Persistence.Repositores
+namespace Viex.MyExpenses.Persistence.Repositories
 {
     public interface IAssociationRepository<T> where T : BaseEntity
     {

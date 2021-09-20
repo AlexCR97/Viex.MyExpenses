@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Viex.MyExpenses.Persistence.Repositores.TransactionEntries;
+using Viex.MyExpenses.Persistence.Repositories.TransactionEntries;
 
 namespace Viex.MyExpenses.Domain.Services.TransactionEntries
 {

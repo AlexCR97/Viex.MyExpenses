@@ -23,8 +23,9 @@ const template = /*html*/`
   </div>
 </div>
 
-<br><br><br>
-<br><br><br>
+<div *ngIf="fill" style="height: 60px;">
+
+</div>
 
 <app-side-navigator [(opened)]="drawerOpened"></app-side-navigator>
 `
@@ -36,6 +37,7 @@ const template = /*html*/`
 export class HeaderComponent implements OnInit {
 
   @Input() actions: any[]
+  @Input() fill = true
   @Input() title: string
   @Input() variant: 'menu' | 'back'
 

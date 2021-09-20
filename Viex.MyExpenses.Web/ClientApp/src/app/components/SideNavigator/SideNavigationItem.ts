@@ -11,19 +11,25 @@ export const HomeSideNavigationItem: SideNavigationItem = {
     icon: 'house',
     label: 'Home',
     path: '/app/home',
-};
+}
+
+export const DescriptorsSideNavigationItem: SideNavigationItem = {
+    icon: 'list-ul',
+    label: 'Descriptors',
+    path: StaticRoutes.descriptorsPage,
+}
 
 export const TransactionsSideNavigationItem: SideNavigationItem = {
     icon: 'currency-dollar',
     label: 'Transactions',
-    path: '/app/transactions',
-};
+    path: StaticRoutes.transactionsPage,
+}
 
 export const SettingsSideNavigationItem: SideNavigationItem = {
     icon: 'gear',
     label: 'Settings',
-    path: '/app/settings',
-};
+    path: StaticRoutes.settingsPage,
+}
 
 export const UsersSideNavigationItem: SideNavigationItem = {
     icon: 'people',
@@ -33,6 +39,7 @@ export const UsersSideNavigationItem: SideNavigationItem = {
 
 export const DefaultSideNavigationItems = [
     HomeSideNavigationItem,
+    DescriptorsSideNavigationItem,
     TransactionsSideNavigationItem,
     SettingsSideNavigationItem,
     UsersSideNavigationItem,

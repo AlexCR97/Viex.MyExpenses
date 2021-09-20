@@ -5,9 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
+namespace Viex.MyExpenses.Persistence.Repositories.TransactionEntries
 {
-    public interface ITransactionEntriesRepository : IRepository<TransactionEntry>
+    public interface ITransactionEntriesRepository : IRepository<TransactionEntry, long>
     {
         Task DeleteAll();
         Task<IList<TransactionEntry>> Search(TransactionEntriesQueryParams queryParams);
@@ -47,8 +47,7 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
         {
             return await _context.TransactionEntries
                 .Where(s => s.TransactionEntryId == id)
-                .Include(s => s.CategoryDescriptor)
-                .Include(s => s.TransactionTypeDescriptor)
+                .IncludeEverything()
                 .FirstOrDefaultAsync();
         }
 
@@ -56,8 +55,7 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
         {
             return await _context.TransactionEntries
                 .Where(predicate)
-                .Include(s => s.CategoryDescriptor)
-                .Include(s => s.TransactionTypeDescriptor)
+                .IncludeEverything()
                 .FirstOrDefaultAsync(predicate);
         }
 
@@ -65,8 +63,7 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
         {
             return await _context.TransactionEntries
                 .Where(predicate)
-                .Include(s => s.CategoryDescriptor)
-                .Include(s => s.TransactionTypeDescriptor)
+                .IncludeEverything()
                 .ToListAsync();
         }
 
@@ -84,8 +81,7 @@ namespace Viex.MyExpenses.Persistence.Repositores.TransactionEntries
             }
 
             return await transactions
-                .Include(x => x.CategoryDescriptor)
-                .Include(x => x.TransactionTypeDescriptor)
+                .IncludeEverything()
                 .ToListAsync();
         }
 

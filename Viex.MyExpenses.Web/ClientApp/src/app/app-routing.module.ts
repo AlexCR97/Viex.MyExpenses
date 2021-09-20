@@ -7,6 +7,7 @@ import { SettingsComponent } from './views/main-container/settings.component';
 import { TransactionsComponent } from './views/main-container/transactions/transactions.component';
 import { TransactionDetailsComponent } from './views/main-container/transactions/transaction-details.component';
 import { UsersPageComponent } from './views/main-container/UsersPage/users-page.component';
+import { DescriptorsPageComponent } from './views/main-container/DescriptorsPage/descriptors-page.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        path: 'descriptors',
+        component: DescriptorsPageComponent,
       },
       {
         path: 'transactions',

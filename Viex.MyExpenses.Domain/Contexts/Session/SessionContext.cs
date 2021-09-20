@@ -8,7 +8,7 @@ namespace Viex.MyExpenses.Domain.Contexts.Session
     public interface ISessionContext
     {
         string Email { get; }
-        long UserId { get; }
+        int UserId { get; }
     }
 
     public class SessionContext : ISessionContext
@@ -22,11 +22,11 @@ namespace Viex.MyExpenses.Domain.Contexts.Session
 
         public string Email => GetClaimValue(CustomClaims.Email);
 
-        public long UserId
+        public int UserId
         {
             get {
                 var claim = GetClaimValue(CustomClaims.UserId);
-                return long.Parse(claim);
+                return int.Parse(claim);
             }
         }
 

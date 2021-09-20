@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 const template = /*html*/`
-<div class="d-flex" [ngClass]="flexContainerClass">
+<div class="d-flex" [ngClass]="flexContainerClass" [ngStyle]="flexContainerStyle">
   <ng-content></ng-content>
 </div>
 `
@@ -17,10 +17,17 @@ export class FlexComponent implements OnInit {
   @Input() padding = 0
   @Input() paddingX = 0
   @Input() paddingY = 0
+  @Input() width: string
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  get flexContainerStyle() {
+    return {
+      'width': this.width,
+    }
   }
 
   get flexContainerClass() {

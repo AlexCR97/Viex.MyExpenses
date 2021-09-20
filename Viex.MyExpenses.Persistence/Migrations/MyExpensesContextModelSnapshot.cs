@@ -19,28 +19,54 @@ namespace Viex.MyExpenses.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.CategoryDescriptor", b =>
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.RoleDescriptors.RoleDescriptor", b =>
                 {
-                    b.Property<long>("CategoryDescriptorId")
+                    b.Property<int>("RoleDescriptorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryDescriptorId");
+                    b.HasKey("RoleDescriptorId");
 
-                    b.ToTable("CategoryDescriptors");
+                    b.ToTable("RoleDescriptors");
                 });
 
-            modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.TransactionEntry", b =>
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionCategoryDescriptors.TransactionCategoryDescriptor", b =>
+                {
+                    b.Property<int>("TransactionCategoryDescriptorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TransactionTypeDescriptorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TransactionCategoryDescriptorId");
+
+                    b.HasIndex("TransactionTypeDescriptorId");
+
+                    b.ToTable("TransactionCategoryDescriptors");
+                });
+
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionEntries.TransactionEntry", b =>
                 {
                     b.Property<long>("TransactionEntryId")
                         .ValueGeneratedOnAdd()
@@ -50,46 +76,78 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long?>("CategoryId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("TypeId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("TransactionCategoryDescriptorId")
+                        .HasColumnType("int");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("TransactionCategoryDescriptorOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TransactionSubCategoryDescriptorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TransactionSubCategoryDescriptorOther")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("TransactionEntryId");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("TransactionCategoryDescriptorId");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("TransactionSubCategoryDescriptorId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("TransactionEntries");
                 });
 
-            modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.TransactionTypeDescriptor", b =>
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionSubCategoryDescriptors.TransactionSubCategoryDescriptor", b =>
                 {
-                    b.Property<long>("TransactionTypeDescriptorId")
+                    b.Property<int>("TransactionSubCategoryDescriptorId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TransactionCategoryDescriptorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TransactionSubCategoryDescriptorId");
+
+                    b.HasIndex("TransactionCategoryDescriptorId");
+
+                    b.ToTable("TransactionSubCategoryDescriptors");
+                });
+
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionTypeDescriptors.TransactionTypeDescriptor", b =>
+                {
+                    b.Property<int>("TransactionTypeDescriptorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -100,17 +158,17 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.ToTable("TransactionTypeDescriptors");
                 });
 
-            modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.User", b =>
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.Users.User", b =>
                 {
-                    b.Property<long>("UserId")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateUpdated")
+                    b.Property<DateTime?>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -125,37 +183,75 @@ namespace Viex.MyExpenses.Persistence.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleDescriptorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("RoleDescriptorId");
+
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Viex.MyExpenses.Persistence.Entities.TransactionEntry", b =>
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionCategoryDescriptors.TransactionCategoryDescriptor", b =>
                 {
-                    b.HasOne("Viex.MyExpenses.Persistence.Entities.CategoryDescriptor", "Category")
+                    b.HasOne("Viex.MyExpenses.Persistence.Repositories.TransactionTypeDescriptors.TransactionTypeDescriptor", "TransactionTypeDescriptor")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("Viex.MyExpenses.Persistence.Entities.TransactionTypeDescriptor", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId")
+                        .HasForeignKey("TransactionTypeDescriptorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Viex.MyExpenses.Persistence.Entities.User", "User")
+                    b.Navigation("TransactionTypeDescriptor");
+                });
+
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionEntries.TransactionEntry", b =>
+                {
+                    b.HasOne("Viex.MyExpenses.Persistence.Repositories.TransactionCategoryDescriptors.TransactionCategoryDescriptor", "TransactionCategoryDescriptor")
+                        .WithMany()
+                        .HasForeignKey("TransactionCategoryDescriptorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Viex.MyExpenses.Persistence.Repositories.TransactionSubCategoryDescriptors.TransactionSubCategoryDescriptor", "TransactionSubCategoryDescriptor")
+                        .WithMany()
+                        .HasForeignKey("TransactionSubCategoryDescriptorId");
+
+                    b.HasOne("Viex.MyExpenses.Persistence.Repositories.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("TransactionCategoryDescriptor");
 
-                    b.Navigation("Type");
+                    b.Navigation("TransactionSubCategoryDescriptor");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.TransactionSubCategoryDescriptors.TransactionSubCategoryDescriptor", b =>
+                {
+                    b.HasOne("Viex.MyExpenses.Persistence.Repositories.TransactionCategoryDescriptors.TransactionCategoryDescriptor", "TransactionCategoryDescriptor")
+                        .WithMany()
+                        .HasForeignKey("TransactionCategoryDescriptorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TransactionCategoryDescriptor");
+                });
+
+            modelBuilder.Entity("Viex.MyExpenses.Persistence.Repositories.Users.User", b =>
+                {
+                    b.HasOne("Viex.MyExpenses.Persistence.Repositories.RoleDescriptors.RoleDescriptor", "RoleDescriptor")
+                        .WithMany()
+                        .HasForeignKey("RoleDescriptorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RoleDescriptor");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Viex.MyExpenses.Persistence.Repositores.Users;
+using Viex.MyExpenses.Persistence.Repositories.Users;
 
 namespace Viex.MyExpenses.Domain.Services.Users
 {

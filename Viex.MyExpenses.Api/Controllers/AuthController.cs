@@ -18,15 +18,15 @@ namespace Viex.MyExpenses.Api.Controllers
 
         [HttpPost("authenticate"), AllowAnonymous]
         public async Task<OAuthResponse> Authenticate([FromBody] SignInModel model) =>
-            await _service.SignIn(model);
+            await _service.Authenticate(model);
 
         [HttpPost("impersonate"), AllowAnonymous]
-        public async Task<OAuthResponse> Authenticate([FromBody] ImpersonateRequest request) =>
+        public async Task<OAuthResponse> Impersonate([FromBody] ImpersonateRequest request) =>
             await _service.Impersonate(request.UserId);
     }
 
     public class ImpersonateRequest
     {
-        public long UserId { get; set; }
+        public int UserId { get; set; }
     }
 }
