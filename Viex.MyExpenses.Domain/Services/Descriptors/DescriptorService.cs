@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Viex.MyExpenses.Core.Extensions;
 using Viex.MyExpenses.Domain.Mappers;
+using Viex.MyExpenses.Domain.Services.Descriptors;
+using Viex.MyExpenses.Domain.Services.TransactionCategoryDescriptors;
 using Viex.MyExpenses.Domain.Services.TransactionSubCategoryDescriptors;
 using Viex.MyExpenses.Persistence.Repositories;
 using Viex.MyExpenses.Persistence.Repositories.RoleDescriptors;
@@ -16,13 +18,14 @@ namespace Viex.MyExpenses.Domain.Services
     public interface IDescriptorService
     {
         Task CreateRoles(IEnumerable<string> roles);
-        Task CreateTransactionCategories(IEnumerable<string> categories);
-        Task CreateTransactionSubCategories(IEnumerable<TransactionSubCategoryDescriptorModel> descriptions);
-        Task CreateTransactionTypes(IEnumerable<string> transactionTypes);
+        Task CreateTransactionCategories(IEnumerable<TransactionCategoryDescriptorModel> descriptors);
+        Task CreateTransactionSubCategories(IEnumerable<TransactionSubCategoryDescriptorModel> descriptors);
+        Task CreateTransactionTypes(IEnumerable<string> descriptors);
         void DropCategories();
         void DropRoles();
         void DropTransactionTypes();
-        Task<IList<string>> GetCategories();
+        Task<IList<string>> GetTransactionCategories();
+        Task<IList<string>> GetDescriptorTypes();
         Task<IList<string>> GetRoles();
         Task<IList<string>> GetTransactionTypes();
     }
@@ -35,6 +38,15 @@ namespace Viex.MyExpenses.Domain.Services
         private readonly ITransactionSubCategoryDescriptorRepository _transactionSubCategoryDescriptorRepository;
         private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptorsRepository;
 
+        public DescriptorService(IModelMapper modelMapper, IRoleDescriptorsRepository roleDescriptorsRepository, ITransactionCategoryDescriptorRepository transactionCategoryDescriptorsRepository, ITransactionSubCategoryDescriptorRepository transactionSubCategoryDescriptorRepository, ITransactionTypeDescriptorsRepository transactionTypeDescriptorsRepository)
+        {
+            _modelMapper = modelMapper;
+            _roleDescriptorsRepository = roleDescriptorsRepository;
+            _transactionCategoryDescriptorsRepository = transactionCategoryDescriptorsRepository;
+            _transactionSubCategoryDescriptorRepository = transactionSubCategoryDescriptorRepository;
+            _transactionTypeDescriptorsRepository = transactionTypeDescriptorsRepository;
+        }
+
         public async Task CreateRoles(IEnumerable<string> roles)
         {
             var descriptors = roles.Select(description => new RoleDescriptor
@@ -46,25 +58,20 @@ namespace Viex.MyExpenses.Domain.Services
             await _roleDescriptorsRepository.CreateAll(descriptors);
         }
 
-        public async Task CreateTransactionCategories(IEnumerable<string> categories)
+        public async Task CreateTransactionCategories(IEnumerable<TransactionCategoryDescriptorModel> descriptors)
         {
-            var categoryDescriptors = categories.Select(category => new TransactionCategoryDescriptor
-            {
-                DateCreated = DateTime.Now,
-                Description = category,
-            });
-
-            await _transactionCategoryDescriptorsRepository.CreateAll(categoryDescriptors);
+            var transactionCategoryDescriptors = await descriptors.SelectAsync(_modelMapper.AsEntity);
+            await _transactionCategoryDescriptorsRepository.CreateAll(transactionCategoryDescriptors);
         }
 
         public async Task CreateTransactionSubCategories(IEnumerable<TransactionSubCategoryDescriptorModel> descriptors)
         {
-            var entities = descriptors.SelectAsync(async descriptor =>
+            var entities = await descriptors.SelectAsync(async descriptor =>
             {
                 var entity = await _modelMapper.AsEntity(descriptor);
                 entity.DateCreated = DateTime.Now;
                 return entity;
-            }).AwaitList();
+            });
 
             await _transactionSubCategoryDescriptorRepository.CreateAll(entities);
         }
@@ -73,6 +80,7 @@ namespace Viex.MyExpenses.Domain.Services
         {
             var transactionTypeDescriptors = transactionTypes.Select(type => new TransactionTypeDescriptor
             {
+                DateCreated = DateTime.Now,
                 Description = type,
             });
 
@@ -88,8 +96,16 @@ namespace Viex.MyExpenses.Domain.Services
         public void DropTransactionTypes() =>
             _transactionTypeDescriptorsRepository.DropAll();
 
-        public async Task<IList<string>> GetCategories() =>
+        public async Task<IList<string>> GetTransactionCategories() =>
             await GetDescriptors(_transactionCategoryDescriptorsRepository);
+
+        public async Task<IList<string>> GetDescriptorTypes() => new List<string>
+        {
+            DescriptorTypes.Roles,
+            DescriptorTypes.TransactionCategories,
+            DescriptorTypes.TransactionSubCategories,
+            DescriptorTypes.TransactionTypes,
+        };
 
         public async Task<IList<string>> GetRoles() =>
             await GetDescriptors(_roleDescriptorsRepository);

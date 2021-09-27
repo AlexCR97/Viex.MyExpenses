@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Viex.MyExpenses.Domain.Services;
 using Viex.MyExpenses.Domain.Services.Descriptors;
+using Viex.MyExpenses.Domain.Services.TransactionCategoryDescriptors;
 
 namespace Viex.MyExpenses.Api.Controllers
 {
@@ -17,21 +18,29 @@ namespace Viex.MyExpenses.Api.Controllers
             _descriptorService = descriptorService;
         }
 
-        [HttpPost(DescriptorTypes.Categories)]
-        public async Task CreateCategories([FromBody] IEnumerable<string> categories) =>
-            await _descriptorService.CreateTransactionCategories(categories);
+        [HttpGet("types")]
+        public async Task<IList<string>> GetDescriptorTypes() =>
+            await _descriptorService.GetDescriptorTypes();
+
+        [HttpPost(DescriptorTypes.TransactionCategories)]
+        public async Task CreateCategories([FromBody] IEnumerable<TransactionCategoryDescriptorModel> descriptors) =>
+            await _descriptorService.CreateTransactionCategories(descriptors);
 
         [HttpPost(DescriptorTypes.TransactionTypes)]
-        public async Task CreateTransactionTypes([FromBody] IEnumerable<string> types) =>
-            await _descriptorService.CreateTransactionTypes(types);
+        public async Task CreateTransactionTypes([FromBody] IEnumerable<string> descriptors) =>
+            await _descriptorService.CreateTransactionTypes(descriptors);
 
         [HttpPost(DescriptorTypes.Roles)]
-        public async Task CreateRoles([FromBody] IEnumerable<string> roles) =>
-            await _descriptorService.CreateRoles(roles);
+        public async Task CreateRoles([FromBody] IEnumerable<string> descriptors) =>
+            await _descriptorService.CreateRoles(descriptors);
 
-        [HttpGet(DescriptorTypes.Categories)]
-        public async Task<IList<string>> GetCategories() =>
-            await _descriptorService.GetCategories();
+        [HttpGet(DescriptorTypes.Roles)]
+        public async Task<IList<string>> GetRoles() =>
+            await _descriptorService.GetRoles();
+
+        [HttpGet(DescriptorTypes.TransactionCategories)]
+        public async Task<IList<string>> GetTransactionCategories() =>
+            await _descriptorService.GetTransactionCategories();
 
         [HttpGet(DescriptorTypes.TransactionTypes)]
         public async Task<IList<string>> GetTransactionTypes() =>

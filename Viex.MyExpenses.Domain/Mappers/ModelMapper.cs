@@ -22,6 +22,9 @@ namespace Viex.MyExpenses.Domain.Mappers
         Task<TransactionEntry> AsEntity(TransactionEntryModel model);
         Task<TransactionEntryModel> AsModel(TransactionEntry entity);
 
+        Task<TransactionCategoryDescriptor> AsEntity(TransactionCategoryDescriptorModel model);
+        Task<TransactionCategoryDescriptorModel> AsModel(TransactionCategoryDescriptor entity);
+
         Task<TransactionSubCategoryDescriptor> AsEntity(TransactionSubCategoryDescriptorModel model);
         Task<TransactionSubCategoryDescriptorModel> AsModel(TransactionSubCategoryDescriptor entity);
 
@@ -36,6 +39,54 @@ namespace Viex.MyExpenses.Domain.Mappers
         private readonly ITransactionEntriesRepository _transactionEntriesRepository;
         private readonly ITransactionTypeDescriptorsRepository _transactionTypeDescriptorsRepository;
         private readonly IUsersRepository _usersRepository;
+
+        public ModelMapper(ITransactionCategoryDescriptorRepository transactionCategoryDescriptorsRepository, ITransactionSubCategoryDescriptorRepository transactionSubCategoryDescriptorRepository, ITransactionEntriesRepository transactionEntriesRepository, ITransactionTypeDescriptorsRepository transactionTypeDescriptorsRepository, IUsersRepository usersRepository)
+        {
+            _transactionCategoryDescriptorsRepository = transactionCategoryDescriptorsRepository;
+            _transactionSubCategoryDescriptorRepository = transactionSubCategoryDescriptorRepository;
+            _transactionEntriesRepository = transactionEntriesRepository;
+            _transactionTypeDescriptorsRepository = transactionTypeDescriptorsRepository;
+            _usersRepository = usersRepository;
+        }
+
+        #region TransactionCategoryDescriptor
+
+        public async Task<TransactionCategoryDescriptor> AsEntity(TransactionCategoryDescriptorModel model)
+        {
+            var entity = new TransactionCategoryDescriptor
+            {
+                DateCreated = DateTime.Now,
+                Description = model.Description,
+            };
+
+            var foundTransactionCategoryDescriptor = await _transactionCategoryDescriptorsRepository.GetByDescription(model.Description);
+            if (foundTransactionCategoryDescriptor != null)
+            {
+                entity.DateCreated = foundTransactionCategoryDescriptor.DateCreated;
+                entity.DateUpdated = foundTransactionCategoryDescriptor.DateUpdated;
+                entity.TransactionCategoryDescriptorId = foundTransactionCategoryDescriptor.TransactionCategoryDescriptorId;
+            }
+
+            var foundTransactionTypeDescriptor = await _transactionTypeDescriptorsRepository.GetByDescription(model.TransactionTypeDescriptor);
+            if (foundTransactionTypeDescriptor != null)
+            {
+                entity.TransactionTypeDescriptor = foundTransactionTypeDescriptor;
+                entity.TransactionTypeDescriptorId = foundTransactionTypeDescriptor.TransactionTypeDescriptorId;
+            }
+
+            return entity;
+        }
+
+        public async Task<TransactionCategoryDescriptorModel> AsModel(TransactionCategoryDescriptor entity)
+        {
+            return new TransactionCategoryDescriptorModel
+            {
+                Description = entity.Description,
+                TransactionTypeDescriptor = entity.TransactionTypeDescriptor?.Description,
+            };
+        }
+
+        #endregion
 
         #region TransactionEntry
 

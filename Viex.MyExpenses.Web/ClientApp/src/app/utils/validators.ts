@@ -10,7 +10,7 @@ export const isNull = (value: any): boolean => value == undefined || value == nu
  * @param value The array to check wether it's null or has no elements
  * @returns True if "value" is null or has no elements
  */
-export const isNullOrEmpty = (value: any[]): boolean => isNull(value) || value.length == 0;
+export const isNullOrEmpty = (value: any[] | FileList): boolean => isNull(value) || value.length == 0;
 
 /**
  * Use for numbers

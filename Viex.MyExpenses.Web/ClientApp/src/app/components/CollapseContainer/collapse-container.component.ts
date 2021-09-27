@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 const template = /*html*/`
-<app-list-item [card]="true" (clicked)="onCollapseHeaderClicked()">
+<app-list-item [card]="true" [title]="title" (clicked)="onCollapseHeaderClicked()">
   <div slot="trailing" [ngStyle]="iconContainerStyle">
     <app-icon-button icon="caret-down" size="xs"></app-icon-button>
   </div>
@@ -22,6 +22,8 @@ export class CollapseContainerComponent implements OnInit {
   get opened() { return this._opened }
   @Input() set opened(opened: boolean) { this._opened = opened }
   @Output() openedChange = new EventEmitter<boolean>();
+
+  @Input() title: string
 
   constructor() { }
 
@@ -55,6 +57,7 @@ export class CollapseContainerComponent implements OnInit {
 
   onCollapseHeaderClicked() {
     this.opened = !this.opened
+    this.openedChange.emit(this.opened)
   }
 
 }

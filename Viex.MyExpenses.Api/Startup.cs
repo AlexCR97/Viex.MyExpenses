@@ -34,7 +34,7 @@ namespace Viex.MyExpenses.Api
             services
                 .AddDomainLayer(Configuration)
                 .AddHttpContextAccessor()
-                .AddCustomAuthentication(Configuration)
+                //.AddCustomAuthentication(Configuration) // TODO Uncomment this
                 .AddControllers()
                 ;
         }
@@ -49,8 +49,6 @@ namespace Viex.MyExpenses.Api
             app.UseCustomExceptionHandler();
 
             app.UseHttpsRedirection();
-
-            //app.UseSpaLayer(SpaLayerBuilderOptions);
 
             app.UseCors(options =>
             {
@@ -71,9 +69,9 @@ namespace Viex.MyExpenses.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization(); // TODO Uncomment this
 
-            app.UseAuthentication();
+            app.UseAuthentication(); // TODO Uncomment this
 
             app.UseEndpoints(endpoints =>
             {
